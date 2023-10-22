@@ -498,6 +498,11 @@ class Controller extends BaseController
         return redirect('/')->with('message', 'Successfully Booked!');
 
     }
+
+    public function filtervenues(Request $request){
+
+         return redirect('/');
+    }
     
     public function test(){
 

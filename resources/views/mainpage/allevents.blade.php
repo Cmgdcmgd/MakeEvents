@@ -8,6 +8,31 @@
 					<h3 class="gdlr-page-title">All Venues</h3>
 				</div>	
 			</div>	
+			<br>
+			<div class="container">
+				<div class="gdlr-hotel-availability-wrapper" style="margin-bottom: 20px;">
+					<form class="gdlr-hotel-availability gdlr-item" id="gdlr-hotel-availability" method="post" action="/filtervenues">
+						@csrf
+						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Max Price</span>
+							<div class="gdlr-wrapper">
+								<input type="text" id="max price" name="maxprice" class="form-control"></div>
+						</div>
+						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Location</span>
+							<div class="gdlr-wrapper">
+								<input type="text" id="location" name="location" class="form-control">
+							</div>
+						</div>
+							<div class="gdlr-wrapper">
+								<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title"></span>
+								<button class="gdlr-button with-border" type="submit" style="margin-top:10px;" id="filter">Filter
+									<i class="fa fa-long-arrow-right icon-long-arrow-right"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="clear"></div>
+			</div>
 
 			<div class="gdlr-content">
 				<div class="with-sidebar-wrapper">
@@ -16,6 +41,7 @@
 							<div class="room-item-wrapper type-classic"  style="margin-bottom: 30px;" >
 								<div class="room-item-holder ">
 									<div class="clear"></div>
+                                        <div class="clear"></div>
                                     @foreach ($data as $item)
                                     <div class="four columns">
 										<div class="gdlr-item gdlr-room-item gdlr-classic-room">

@@ -74,6 +74,7 @@ Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);
 
 
 Route::get('/customerlogout', [Controller::class, 'customerlogout']);
+Route::post('/filtervenues', [Controller::class, 'filtervenues']);
 
 
 Route::get('/test', [Controller::class, 'test']);
