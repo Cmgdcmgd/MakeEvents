@@ -23,7 +23,7 @@
                                     <form action="/logincustomer" method="POST">
                                         @csrf
                                         
-                                        <p>Username </p>
+                                        <p>Email Address </p>
                                         <p>
                                             <span class="wpcf7-form-control-wrap" data-name="your-name">
                                                 <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" type="text" name="email" />
