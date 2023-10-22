@@ -92,7 +92,7 @@ class User extends Authenticatable
             $file = $data->file('profpic')->getClientOriginalName();
 
             DB::table('users')
-                ->where('user_id',$data['user_id'])
+                ->where('id',$data['user_id'])
                 ->update([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
@@ -106,7 +106,7 @@ class User extends Authenticatable
         }
         else{
             DB::table('users')
-                ->where('user_id',$data['user_id'])
+                ->where('id',$data['user_id'])
                 ->update([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
@@ -126,7 +126,7 @@ class User extends Authenticatable
             $file = $data->file('profpic')->getClientOriginalName();
 
             DB::table('users')
-                ->where('user_id',$data['user_id'])
+                ->where('id',$data['user_id'])
                 ->update([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
@@ -138,7 +138,7 @@ class User extends Authenticatable
         }
         else{
             DB::table('users')
-                ->where('user_id',$data['user_id'])
+                ->where('id',$data['user_id'])
                 ->update([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
@@ -162,5 +162,19 @@ class User extends Authenticatable
                     'contact_number' => $data['contact_number'],
                     'user_type' => 'Customer',
             ]);
+    }
+
+    public static function editCustomer($data){
+
+        DB::table('users')
+                ->where('id',$data['user_id'])
+                ->update([
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'name' => $data['first_name']." ".$data['last_name'],
+                    'email' => $data['email_address'],
+                    'contact_number' => $data['contact_number'],
+            ]);
+
     }
 }

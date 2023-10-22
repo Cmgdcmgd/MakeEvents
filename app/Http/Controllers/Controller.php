@@ -532,6 +532,27 @@ class Controller extends BaseController
 
         return view('mainpage.allevents',compact('data'));
     }
+
+    public function myprofile(){
+
+        $user = User::where('id',session('user_id'))->first();
+
+        return view('mainpage.myprofile', compact('user'));
+    }
+
+    public function editprofile(){
+
+        $user = User::where('id',session('user_id'))->first();
+
+        return view('mainpage.editprofile', compact('user'));
+    }
+
+    public function editcustomer(Request $data){
+
+        User::editCustomer($data);
+
+        return redirect('/');
+    }
     
     public function test(){
 

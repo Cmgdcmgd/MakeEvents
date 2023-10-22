@@ -68,13 +68,15 @@ Route::get('/venuedetails/{id}', [Controller::class, 'venuedetails']);
 Route::get('/allvenues', [Controller::class, 'allvenues']);
 Route::get('/allcoordinators', [Controller::class, 'allcoordinators']);
 Route::get('/eventscalendar', [Controller::class, 'eventscalendar']);
+Route::get('/myprofile', [Controller::class, 'myprofile']);
+Route::get('/editprofile', [Controller::class, 'editprofile']);
 Route::get('/coordinatordetails/{id}', [Controller::class, 'coordinatordetails']);
 Route::patch('/updateevent/{id}', [Controller::class, 'updateevent']);
 Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);
 
 
 Route::get('/customerlogout', [Controller::class, 'customerlogout']);
-Route::post('/filtervenues', [Controller::class, 'filtervenues']);
+Route::post('/editcustomer', [Controller::class, 'editcustomer']);
 
 
 Route::get('/test', [Controller::class, 'test']);
