@@ -70,6 +70,7 @@ Route::get('/allcoordinators', [Controller::class, 'allcoordinators']);
 Route::get('/eventscalendar', [Controller::class, 'eventscalendar']);
 Route::get('/myprofile', [Controller::class, 'myprofile']);
 Route::get('/editprofile', [Controller::class, 'editprofile']);
+Route::get('/aboutus', [Controller::class, 'aboutus']);
 Route::get('/coordinatordetails/{id}', [Controller::class, 'coordinatordetails']);
 Route::patch('/updateevent/{id}', [Controller::class, 'updateevent']);
 Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);

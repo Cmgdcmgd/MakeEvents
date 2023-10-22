@@ -553,6 +553,11 @@ class Controller extends BaseController
 
         return redirect('/');
     }
+
+    public function aboutus(){
+
+        return view('mainpage.aboutus');
+    }
     
     public function test(){
 
