@@ -273,7 +273,7 @@ class Controller extends BaseController
     public function allcoordinators(){
 
         $data = DB::table('users')
-                ->join('coordinators','users.user_id','=','coordinators.user_id')
+                ->join('coordinators','users.id','=','coordinators.user_id')
                 ->select('coordinators.*','users.*')
                 ->where('users.user_type','Event Coordinator')
                 ->get();
