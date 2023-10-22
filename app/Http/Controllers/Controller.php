@@ -283,7 +283,9 @@ class Controller extends BaseController
 
     public function eventbooking(Request $request){
 
-        $users = User::where('user_id',$request['user_id'])->first();
+        dd($request);
+
+        $users = User::where('id',$request['user_id'])->first();
 
         $venues = Venues::where('venue_id',$request['venue_id'])->first();
 
@@ -396,8 +398,6 @@ class Controller extends BaseController
     public function confirmpayment(Request $data){
 
         Eventbooking::confirmPayment($data);
-
-
 
     }
 

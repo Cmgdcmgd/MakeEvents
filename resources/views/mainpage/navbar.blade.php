@@ -16,7 +16,7 @@
                                 <li class="menu-item"><a href="/allvenues">Event Venues</a></li>
                                 <li class="menu-item"><a href="/allcoordinators">Event Coordinators</a></li>
                                 @if (session('logged') == true)
-                                    <li class="menu-item"><a href="/logout">Logout</a></li>
+                                    <li class="menu-item"><a href="/customerlogout">Logout</a></li>
                                 @else
                                     <li class="menu-item"><a href="/customerlogin">Login</a></li>
                                 @endif
@@ -33,7 +33,7 @@
                             <li class="menu-item"><a href="/allvenues">Event Venues</a></li>
                             <li class="menu-item menu-item gdlr-normal-menu"><a href="/allcoordinators">Event Coordinators</a></li>
                             @if (session('logged') == true)
-                                <li class="menu-item"><a href="/logout">Logout</a></li>
+                                <li class="menu-item"><a href="/customerlogout">Logout</a></li>
                             @else
                                 <li class="menu-item"><a href="/customerlogin">Login</a></li>
                             @endif
