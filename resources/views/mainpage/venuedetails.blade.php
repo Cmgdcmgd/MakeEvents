@@ -37,7 +37,7 @@
                                                         <input type="text" id="reservedatepicker" class="gdlr-datepicker" name="reserved_date"/>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="user_id" value="{{session('id')}}">
+                                                <input type="hidden" name="user_id" value="{{session('user_id')}}">
                                                 <input type="hidden" name="venue_id" value="{{$data->venue_id}}">
                                                 <div class="gdlr-reservation-field gdlr-resv-combobox gdlr-resv-night">
                                                     <span class="gdlr-reservation-field-title">Days</span>

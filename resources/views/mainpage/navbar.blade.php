@@ -8,7 +8,7 @@
                 <div class="gdlr-logo">
                     <div class="gdlr-logo-inner">
                         <a href="index.html">
-                            <img src="{{asset('mainpage/upload/logo-dark.png')}}" alt=""> </a>
+                            <img src="{{asset('mainpage/images/Brown Neutral Minimalist Monoline Simple Clean Photography Logo.png')}}" alt=""> </a>
                         <div class="gdlr-responsive-navigation dl-menuwrapper" id="gdlr-responsive-navigation">
                             <button class="dl-trigger">Open Menu</button>
                             <ul id="menu-main-menu" class="dl-menu gdlr-main-mobile-menu">

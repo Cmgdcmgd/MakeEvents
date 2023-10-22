@@ -60,6 +60,7 @@ Route::post('/adminlogin', [Controller::class, 'adminlogin']);
 Route::post('/confirmpayment', [Controller::class, 'confirmpayment']);
 Route::post('/coordinatorprofilemanagement', [Controller::class, 'coordinatorprofilemanagement']);
 Route::post('/eventbooking', [Controller::class, 'eventbooking']);
+Route::post('/coordinatorbooking', [Controller::class, 'coordinatorbooking']);
 Route::post('/addvenue', [Controller::class, 'addvenue']);
 Route::post('/addcustomer', [Controller::class, 'addcustomer']);
 Route::post('/eventcancel', [Controller::class, 'eventcancel']);

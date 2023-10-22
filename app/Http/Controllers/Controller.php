@@ -8,10 +8,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\MailNotify;
 use App\Models\User;
 use App\Models\Venues;
 use App\Models\Coordinators;
 use App\Models\Eventbooking;
+use App\Models\Coordinatorbooking;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
@@ -283,8 +286,6 @@ class Controller extends BaseController
 
     public function eventbooking(Request $request){
 
-        dd($request);
-
         $users = User::where('id',$request['user_id'])->first();
 
         $venues = Venues::where('venue_id',$request['venue_id'])->first();
@@ -317,7 +318,7 @@ class Controller extends BaseController
 
             $request = User::where('email',$data['email'])->first();
             $data->session()->put('logged', true);
-            $data->session()->put('user_id', $request->user_id);
+            $data->session()->put('user_id', $request->id);
 
             return redirect('/')->with('message', 'Welcome!');
         }
@@ -467,6 +468,35 @@ class Controller extends BaseController
     public function receive(Request $request)
     {
         return view('admin.receive', ['message' => $request->get('message')]);
+    }
+
+    public function coordinatorbooking(Request $request){
+
+        $users = User::where('id',$request['user_id'])->first(); //session
+
+        $coordinators = User::where('id',$request['coordinator_id'])->first(); //user id
+
+        $coordinatorsprice = Coordinators::where('user_id',$request['coordinator_id'])->first();
+
+        $body1 = "Hi, ".$users->first_name."!";
+        $body2 = "Thank you for booking a coordinator! To fully reserve your coordinator, please pay the ₱".$coordinatorsprice->price." fee to the bank details below: ";
+        $bankdetails = $coordinatorsprice->bank;
+        $body3 =  "Please do not reply to this message. This email was sent from a notification-only email address that cannot accept incoming email.";
+        
+        $data = [
+            'subject' => 'Booking Confirmation from Make Events',
+            'body1' => $body1,
+            'body2' => $body2,
+            'body3' => $body3,
+            'bankdetails' => $bankdetails
+        ];
+
+        Mail::to($users->email)->send(new MailNotify($data));
+        
+        Coordinatorbooking::newBooking($request);
+
+        return redirect('/')->with('message', 'Successfully Booked!');
+
     }
     
     public function test(){
