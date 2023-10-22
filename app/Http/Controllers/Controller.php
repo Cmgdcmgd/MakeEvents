@@ -501,7 +501,36 @@ class Controller extends BaseController
 
     public function filtervenues(Request $request){
 
-         return redirect('/');
+        if(!empty($request['maxprice'])){
+            if(!empty($request['location'])){
+                $data = DB::table('venues')
+                        ->select('*')
+                        ->where('price', '<=', $request['maxprice'])
+                        ->where('location', 'LIKE', '%'.$request['location'].'%')
+                        ->get();
+            }
+            else{
+                $data = DB::table('venues')
+                        ->select('*')
+                        ->where('price', '<=', $request['maxprice'])
+                        ->get();
+            }
+        }
+        else{
+            if(!empty($request['location'])){
+                $data = DB::table('venues')
+                        ->select('*')
+                        ->where('location', 'LIKE', '%'.$request['location'].'%')
+                        ->get();
+            }
+            else{
+                $data = DB::table('venues')
+                        ->select('*')
+                        ->get();
+            }
+        }
+
+        return view('mainpage.allevents',compact('data'));
     }
     
     public function test(){
