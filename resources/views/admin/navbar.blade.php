@@ -101,7 +101,7 @@
                                     <a href="/pendingpayments" class="nav-link"> Pending Payments </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/eventscalendar" class="nav-link"> Events Calendar </a>
+                                    <a href="/eventscalendar" class="nav-link"> Clients Events Calendar </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/chatify" class="nav-link"> Chat </a>
@@ -118,13 +118,10 @@
                         <div class="collapse menu-dropdown" id="eventcoordinator">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="/pendingpaymentscoordinator" class="nav-link"> Profile Management </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="/pendingpaymentscoordinator" class="nav-link"> Pending Payments </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/coordinatorcalendar" class="nav-link"> Events Calendar </a>
+                                    <a href="/coordinatorcalendar" class="nav-link"> Clients Events Calendar </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/coordinatorslist" class="nav-link"> Event Coordinator list </a>

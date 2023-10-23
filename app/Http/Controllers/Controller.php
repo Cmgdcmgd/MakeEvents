@@ -99,8 +99,8 @@ class Controller extends BaseController
             'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
             'contact_number'=> 'required',
             'email' => 'required|email|',
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required|min:8',
+            'password' => 'confirmed|min:8',
+            'password_confirmation' => 'min:8',
             'user_type' => 'required',
         ],
         [
@@ -110,8 +110,6 @@ class Controller extends BaseController
             'email.required' => 'Email Address is required',
             'email.email' => 'Please input a valid email address',
             'email.unique' => 'User already existing. Please input a different email address.',
-            'password.required' => 'Password is required',
-            'password_confirmation.required' => 'Confirm password is required',
             'user_type.required' => 'User Type is required'
         ]);
 
@@ -483,8 +481,6 @@ class Controller extends BaseController
 
     public function eventscalendar(){
 
-        
-
         $bookings = DB::table('eventbooking')
                     ->join('venues','eventbooking.venue_id','=','venues.venue_id')
                     ->join('users','eventbooking.user_id','=','users.id')
@@ -525,18 +521,23 @@ class Controller extends BaseController
                 ->get();
 
         
-
-        foreach($bookings as $booking){
-            $events[] = [
-                'id' => $booking->coordinatorbooking_id,
-                'title' => $booking->first_name." ".$booking->last_name,
-                'reserved' => $booking->reserved_date,
-                'email' => $booking->email,
-                'start' => $booking->reserved_date,
-                'phone' =>$booking->contact_number,
-                'end' => $booking->reserved_date
-            ];
+        if(count($bookings) >= 1){
+            foreach($bookings as $booking){
+                $events[] = [
+                    'id' => $booking->coordinatorbooking_id,
+                    'title' => $booking->first_name." ".$booking->last_name,
+                    'reserved' => $booking->reserved_date,
+                    'email' => $booking->email,
+                    'start' => $booking->reserved_date,
+                    'phone' =>$booking->contact_number,
+                    'end' => $booking->reserved_date
+                ];
+            }
         }
+        else{
+            $events = [];
+        }
+        
 
         return view('admin.coordinatorcalendar', compact('events'));
     }
