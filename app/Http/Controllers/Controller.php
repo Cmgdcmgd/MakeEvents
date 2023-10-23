@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 use Mail;
 use App\Mail\MailNotify;
 use App\Models\User;
@@ -669,15 +670,22 @@ class Controller extends BaseController
 
     public function editcustomer(Request $data){
 
+        $profpic = session('profpic');
 
         if(!empty($data['profpic'])){
             $file = $data->file('profpic');
             $file->move(base_path('\public\admin\images\users'), $file->getClientOriginalName());
+
+            $profpic = $file->getClientOriginalName();
         }
 
         User::editCustomer($data);
 
-        return redirect('/');
+        \Session::forget('profpic');
+
+        session(['profpic' => $profpic]);
+
+        return redirect('/myprofile');
     }
 
     public function aboutus(){
