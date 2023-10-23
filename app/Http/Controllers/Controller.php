@@ -172,8 +172,16 @@ class Controller extends BaseController
 
     public function venueslist(){
 
-        $data = Venues::all();
-
+        if(session('user_type') == "Administrator"){
+            $data = Venues::all();
+        }
+        else{
+            $data = DB::table('venues')
+                ->select('*')
+                ->where('user_id',session('userid'))
+                ->get();
+        }
+        
         return view('admin.venuesList',compact('data'));
     }
 
@@ -228,12 +236,20 @@ class Controller extends BaseController
 
     public function coordinatorslist(){
 
-        $users = DB::table('coordinators')
+        if(session('user_type') == "Administrator"){
+            $users = DB::table('coordinators')
+            ->join('users','users.id','=','coordinators.user_id')
+            ->select('coordinators.*','users.*')
+            ->get();
+        }
+        else{
+            $users = DB::table('coordinators')
                 ->join('users','users.id','=','coordinators.user_id')
                 ->select('coordinators.*','users.*')
                 ->where('coordinators.user_id',session('userid'))
                 ->get();
-
+        }
+        
         return view('admin.coordinatorsList',compact('users'));
     }
 
@@ -413,6 +429,7 @@ class Controller extends BaseController
                 ->join('users','eventbooking.user_id','=','users.id')
                 ->select('eventbooking.*','venues.*','users.*')
                 ->where('eventbooking.reservation_status','Pending Payment')
+                ->where('venues.user_id',session('userid'))
                 ->get();
 
 
@@ -420,6 +437,14 @@ class Controller extends BaseController
     }
 
     public function pendingpaymentscoordinator(){
+
+        if(session('user_type') == "Administrator"){
+            $data = DB::table('coordinatorbooking')
+                ->join('users','coordinatorbooking.booked_by','=','users.id')
+                ->select('coordinatorbooking.*','users.*')
+                ->where('coordinatorbooking.reservation_status','Pending Payment')
+                ->get();
+        }
 
         $data = DB::table('coordinatorbooking')
                 ->join('users','coordinatorbooking.booked_by','=','users.id')
@@ -461,6 +486,7 @@ class Controller extends BaseController
                     ->join('users','eventbooking.user_id','=','users.id')
                     ->select('eventbooking.*','venues.*','users.*')
                     ->where('eventbooking.reservation_status','Reserved')
+                    ->where('venues.user_id',session('userid'))
                     ->get();
 
         foreach($bookings as $booking){

@@ -23,7 +23,7 @@
                             <!--end row-->
                             
                             <div class="row">
-                                @if(session('user_type') == "Vendor")
+                                @if(session('user_type') == "Vendor" || session('user_type') == "Administrator")
                                 <div class="col-xl-3 col-md-6">
                                     <!-- card -->
                                     <a href="/newvenue">

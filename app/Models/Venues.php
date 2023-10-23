@@ -31,6 +31,7 @@ class Venues extends Model
     public static function addVenue($data,$mainPhotoName,$additionalPhotos){
         DB::table('venues')
             ->insert([
+                'user_id' => session('userid'),
                 'venue_name' => $data['venue_name'],
                 'price' => $data['price'],
                 'email_address' => $data['email_address'],
@@ -87,4 +88,6 @@ class Venues extends Model
                 'description' => $data['description']
         ]);
     }
+
+    
 }

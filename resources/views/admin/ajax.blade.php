@@ -73,7 +73,7 @@ $('.mainphoto').click(function(e){
 
     $('#mainPhotoBody').empty();
 
-    $('#mainPhotoBody').append('<img src="mainpage/main photos/' + mainphoto + '">');
+    $('#mainPhotoBody').append('<img src="mainpage/main photos/' + mainphoto + '"width="90%">');
 });
 
 $('.otherphotos').click(function(e){

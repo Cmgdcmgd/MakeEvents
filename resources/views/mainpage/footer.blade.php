@@ -101,8 +101,6 @@
         toastr.success("{{ session()->get('message') }}");
     @endif
 
-    createEditableSelect(document.forms[0].myText)
-
     $('#try').click(function(e){
         Swal.fire({
             title: 'Are you sure?',
