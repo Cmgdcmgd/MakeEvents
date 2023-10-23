@@ -25,7 +25,22 @@ class Controller extends BaseController
 
     public function dashboard(){
 
-        return view('admin.dashboard');
+
+        $authenticateduser = User::where('id',auth()->user()->id)->first();
+
+        if($authenticateduser->user_type == "Customer"){
+            return redirect('/chatify');
+        }
+        else{
+
+            session(['name' => $authenticateduser->name]);
+            session(['user_type' => $authenticateduser->user_type]);
+            session(['userid' => auth()->user()->id]);
+        
+            return view('admin.dashboard');
+        }
+
+        
     }
 
     public function adduser(Request $data){
@@ -71,7 +86,7 @@ class Controller extends BaseController
 
     public function useredit($id){
         
-        $user = User::where('user_id',$id)->first();
+        $user = User::where('id',$id)->first();
         
         return view('admin.userEdit',compact('user'));
     }
@@ -82,7 +97,7 @@ class Controller extends BaseController
             'first_name' => 'required|regex:/^[\pL\s\-]+$/u',
             'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
             'contact_number'=> 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required|min:8',
             'user_type' => 'required',
@@ -213,17 +228,25 @@ class Controller extends BaseController
 
     public function coordinatorslist(){
 
-        $data = User::where('user_type','Event Coordinator')->get();
+        $users = DB::table('coordinators')
+                ->join('users','users.id','=','coordinators.user_id')
+                ->select('coordinators.*','users.*')
+                ->where('coordinators.user_id',session('userid'))
+                ->get();
 
-        return view('admin.coordinatorsList',compact('data'));
+        return view('admin.coordinatorsList',compact('users'));
     }
 
     public function coordinatoredit($id){
+
+        $coordinator = DB::table('coordinators')
+                ->join('users','users.id','=','coordinators.user_id')
+                ->select('coordinators.*','users.*')
+                ->where('coordinators.user_id',session('userid'))
+                ->first();
         
-        $coordinator = User::where('user_id',$id)->first();
-        $emcee = Coordinators::where('user_id',$id)->first();
         
-        return view('admin.coordinatorEdit',compact('coordinator','emcee'));
+        return view('admin.coordinatorEdit',compact('coordinator'));
     }
 
     public function coordinatorprofilemanagement(Request $data){
@@ -387,7 +410,7 @@ class Controller extends BaseController
 
         $data = DB::table('eventbooking')
                 ->join('venues','eventbooking.venue_id','=','venues.venue_id')
-                ->join('users','eventbooking.user_id','=','users.user_id')
+                ->join('users','eventbooking.user_id','=','users.id')
                 ->select('eventbooking.*','venues.*','users.*')
                 ->where('eventbooking.reservation_status','Pending Payment')
                 ->get();
@@ -396,9 +419,28 @@ class Controller extends BaseController
         return view('admin.pendingpayments', compact('data'));
     }
 
+    public function pendingpaymentscoordinator(){
+
+        $data = DB::table('coordinatorbooking')
+                ->join('users','coordinatorbooking.booked_by','=','users.id')
+                ->select('coordinatorbooking.*','users.*')
+                ->where('coordinatorbooking.reservation_status','Pending Payment')
+                ->where('coordinatorbooking.coordinator_id',session('userid'))
+                ->get();
+
+
+        return view('admin.pendingpaymentscoordinator', compact('data'));
+    }
+
     public function confirmpayment(Request $data){
 
         Eventbooking::confirmPayment($data);
+
+    }
+
+    public function confirmpaymentcoordinator(Request $data){
+
+        Coordinatorbooking::confirmPayment($data);
 
     }
 
@@ -437,6 +479,32 @@ class Controller extends BaseController
         return view('admin.eventscalendar', compact('events'));
     }
 
+    public function coordinatorcalendar(){
+
+        $bookings = DB::table('coordinatorbooking')
+                ->join('users','coordinatorbooking.booked_by','=','users.id')
+                ->select('coordinatorbooking.*','users.*')
+                ->where('coordinatorbooking.reservation_status','Reserved')
+                ->where('coordinatorbooking.coordinator_id',session('userid'))
+                ->get();
+
+        
+
+        foreach($bookings as $booking){
+            $events[] = [
+                'id' => $booking->coordinatorbooking_id,
+                'title' => $booking->first_name." ".$booking->last_name,
+                'reserved' => $booking->reserved_date,
+                'email' => $booking->email,
+                'start' => $booking->reserved_date,
+                'phone' =>$booking->contact_number,
+                'end' => $booking->reserved_date
+            ];
+        }
+
+        return view('admin.coordinatorcalendar', compact('events'));
+    }
+
     public function updateevent(Request $request ,$id){
 
         $booking = Eventbooking::where('eventbooking_id',$id);
@@ -454,6 +522,20 @@ class Controller extends BaseController
     public function eventcancel(Request $data){
 
         Eventboking::eventCancel($data);
+    }
+
+    public function updatecoordinatorevent(Request $request ,$id){
+
+        $booking = Coordinatorbooking::where('coordinatorbooking_id',$id);
+        if(! $booking) {
+            return response()->json([
+                'error' => 'Unable to locate the event'
+            ], 404);
+        }
+        
+        Coordinatorbooking::updateEvent($request->start_date,$id);
+
+        return response()->json('Event updated');
     }
 
     public function broadcast(Request $request)

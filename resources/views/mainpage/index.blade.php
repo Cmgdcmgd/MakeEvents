@@ -87,10 +87,10 @@
                                         <div class="gdlr-item gdlr-column-service-item gdlr-type-2">
                                             <div class="column-service-image"><img src="{{asset('mainpage/upload/column-service-1.jpg')}}" alt="" width="500" height="257"></div>
                                             <div class="column-service-content-wrapper">
-                                                <h3 class="column-service-title">Perfect For Relaxing</h3>
+                                                <h3 class="column-service-title">Birthday Party</h3>
                                                 <div class="column-service-divider"></div>
                                                 <div class="column-service-content gdlr-skin-content">
-                                                    <p>Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
+                                                    <p>Plan here at Make Events Memorable, where vendors and event coordinators are available to provide you with venue and other needs, and assist with planning and ddecision making!</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,10 +101,10 @@
                                         <div class="gdlr-item gdlr-column-service-item gdlr-type-2">
                                             <div class="column-service-image"><img src="{{asset('mainpage/upload/column-service-2.jpg')}}" alt="" width="500" height="257"></div>
                                             <div class="column-service-content-wrapper">
-                                                <h3 class="column-service-title">Luxury Rooms</h3>
+                                                <h3 class="column-service-title">Wedding</h3>
                                                 <div class="column-service-divider"></div>
                                                 <div class="column-service-content gdlr-skin-content">
-                                                    <p>Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
+                                                    <p>Plan here at Make Events Memorable, where vendors and event coordinators are available to provide you with venue and other needs, and assist with planning and ddecision making!</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,10 +115,10 @@
                                         <div class="gdlr-item gdlr-column-service-item gdlr-type-2">
                                             <div class="column-service-image"><img src="{{asset('mainpage/upload/column-service-3.jpg')}}" alt="" width="500" height="257"></div>
                                             <div class="column-service-content-wrapper">
-                                                <h3 class="column-service-title">Best for dining</h3>
+                                                <h3 class="column-service-title">Engagement Party</h3>
                                                 <div class="column-service-divider"></div>
                                                 <div class="column-service-content gdlr-skin-content">
-                                                    <p>Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
+                                                    <p>Plan here at Make Events Memorable, where vendors and event coordinators are available to provide you with venue and other needs, and assist with planning and ddecision making!</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,38 +195,14 @@
                         </div>
                         <div class="clear"></div>
                     </section>
-                    <section id="content-section-5">
-                        <div class="gdlr-parallax-wrapper gdlr-background-image gdlr-show-all gdlr-skin-dark-skin" id="gdlr-parallax-wrapper-2" data-bgspeed="0.1" style="background-image: url('mainpage/upload/about-bg.jpg'); padding-top: 160px; padding-bottom: 110px; ">
-                            <div class="container">
-                                <div class="six columns">
-                                    <div class="gdlr-title-item">
-                                        <div class="gdlr-item-title-wrapper gdlr-item pos-center pos-center-divider ">
-                                            <div class="gdlr-item-title-head">
-                                                <h3 class="gdlr-item-title gdlr-skin-title gdlr-skin-border">A Little About Us</h3>
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div class="gdlr-item-title-divider"></div>
-                                            <div class="gdlr-item-title-caption gdlr-title-font gdlr-skin-info">Inspiration can be found everywhere</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="six columns">
-                                    <div class="gdlr-item gdlr-content-item">
-                                        <p style="text-align: center;">Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. </p>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </section>
+                    
                     <section id="content-section-7">
                         <div class="gdlr-color-wrapper  gdlr-show-all gdlr-skin-dark-testimonial" style="background-color: #1e1e1e; padding-top: 80px; padding-bottom: 45px; ">
                             <div class="container">
                                 <div class="gdlr-testimonial-item-wrapper">
                                     <div class="gdlr-item-title-wrapper gdlr-item pos-center gdlr-nav-container ">
                                         <div class="gdlr-item-title-head">
-                                            <h3 class="gdlr-item-title gdlr-skin-title gdlr-skin-border">Testimonial</h3>
+                                            <h3 class="gdlr-item-title gdlr-skin-title gdlr-skin-border">Be a part of us!</h3>
                                             <div class="gdlr-item-title-carousel"><i class="icon-angle-left gdlr-flex-prev"></i><i class="icon-angle-right gdlr-flex-next"></i></div>
                                             <div class="clear"></div>
                                         </div>
@@ -237,23 +213,27 @@
                                                 <ul class="slides">
                                                     <li class="testimonial-item">
                                                         <div class="testimonial-content gdlr-skin-content">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Nul id dolor id nibh ultricies vehicula ut id elit. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+                                                            <p>Are you celebrating your birthday? Or your Wedding? Do you need a venue? Vendors offer packages! Come see their facilities. Wanna meet vendors and event coordinators to help you plan and organize your event? Meet Vendors and Event Coordinators that will help you plan your event!</p>
                                                         </div>
-                                                        <div class="testimonial-info"><span class="testimonial-author gdlr-skin-link-color">Angelina Cole</span><span class="testimonial-position gdlr-skin-info"><span>, </span>Traveller</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="testimonial-item">
-                                                        <div class="testimonial-content gdlr-skin-content">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Nul id dolor id nibh ultricies vehicula ut id elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta.</p>
-                                                        </div>
-                                                        <div class="testimonial-info"><span class="testimonial-author gdlr-skin-link-color">John Smith</span><span class="testimonial-position gdlr-skin-info"><span>, </span>Businesman</span>
+                                                        <div class="testimonial-info"><span class="testimonial-author gdlr-skin-link-color">Client</span><span class="testimonial-position gdlr-skin-info"><span>
                                                         </div>
                                                     </li>
                                                     <li class="testimonial-item">
                                                         <div class="testimonial-content gdlr-skin-content">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Nul id dolor id nibh ultricies vehicula ut id elit. Nullam quis risus eget urna mollis ornare leo.</p>
+                                                            <p>Are you an event coordinator? Become a freelance event coordinator where clients will be the one to seek you out! Advertise your skills and earn a client at the comfort of your own home.</p>
                                                         </div>
-                                                        <div class="testimonial-info"><span class="testimonial-author gdlr-skin-link-color">Pam Pamelar</span><span class="testimonial-position gdlr-skin-info"><span>, </span>Traveller</span>
+                                                        <div class="testimonial-info">
+                                                            <a class="gdlr-button with-border" href="/register" style="margin-top:10px;" id="filter">Be an event coordinator now!
+
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="testimonial-item">
+                                                        <div class="testimonial-content gdlr-skin-content">
+                                                            <p>Are you an event supplier/vendor? Advertise your business! Earn Clients through this website! Communicate to Clients virtually!</p>
+                                                        </div>
+                                                        <div class="testimonial-info"><a class="gdlr-button with-border" href="/register" style="margin-top:10px;" id="filter">Be a vendor now!
+                                                        </a>
                                                         </div>
                                                     </li>
                                                 </ul>

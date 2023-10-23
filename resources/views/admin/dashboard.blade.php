@@ -14,131 +14,221 @@
                                 <div class="col-12">
                                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                         <div class="flex-grow-1">
-                                            <h4 class="fs-16 mb-1">Good Morning, Anna!</h4>
-                                            <p class="text-muted mb-0">Here's what's happening with your store today.</p>
+                                            <h4 class="fs-16 mb-1">Good Morning, {{session('name')}}!</h4>
                                         </div>
                                     </div><!-- end card header -->
                                 </div>
                                 <!--end col-->
                             </div>
                             <!--end row-->
-
+                            
                             <div class="row">
+                                @if(session('user_type') == "Vendor")
                                 <div class="col-xl-3 col-md-6">
                                     <!-- card -->
-                                    <div class="card card-animate">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Earnings</p>
+                                    <a href="/newvenue">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>New Venue</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                            <i class="bx bx-buildings text-info"></i>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-shrink-0">
-                                                    <h5 class="text-success fs-14 mb-0">
-                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
-                                                    </h5>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Vendor")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/venueslist">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Venue List</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-building text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="559.25">0</span>k </h4>
-                                                    <a href="" class="text-decoration-underline">View net earnings</a>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Event Coordinator")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/coordinatorlist">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Coordinator List</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-building text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                        <i class="bx bx-dollar-circle text-success"></i>
-                                                    </span>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Vendor")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/pendingpayments">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Pending Payments</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-credit-card-alt text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Event Coordinator")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/pendingpaymentscoordinator">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Pending Payments</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-credit-card-alt text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Vendor")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/eventscalendar">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Events Calendar</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-calendar text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                @if(session('user_type') == "Event Coordinator")
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/coordinatorcalendar">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Events Calendar</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-calendar text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
+                                </div><!-- end col -->
+                                @endif
+                                <div class="col-xl-3 col-md-6">
+                                    <!-- card -->
+                                    <a href="/chatify">
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Live Chat</h4>
+                                                        
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-sm flex-shrink-0">
+                                                            <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                                <i class="bx bx-chat text-info"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </a>
+                                    
                                 </div><!-- end col -->
 
-                                <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
-                                    <div class="card card-animate">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                 <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Orders</p>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <h5 class="text-danger fs-14 mb-0">
-                                                        <i class="ri-arrow-right-down-line fs-13 align-middle"></i> -3.57 %
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="36894">0</span></h4>
-                                                    <a href="" class="text-decoration-underline">View all orders</a>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-info-subtle rounded fs-3">
-                                                        <i class="bx bx-shopping-bag text-info"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
-
-                                <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
-                                    <div class="card card-animate">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Customers</p>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <h5 class="text-success fs-14 mb-0">
-                                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="183.35">0</span>M </h4>
-                                                    <a href="" class="text-decoration-underline">See details</a>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                                        <i class="bx bx-user-circle text-warning"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
-
-                                <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
-                                    <div class="card card-animate">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> My Balance</p>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <h5 class="text-muted fs-14 mb-0">
-                                                        +0.00 %
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="165.89">0</span>k </h4>
-                                                    <a href="" class="text-decoration-underline">Withdraw money</a>
-                                                </div>
-                                                <div class="avatar-sm flex-shrink-0">
-                                                    <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                                        <i class="bx bx-wallet text-primary"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
+                              
                             </div> <!-- end row-->
 
 

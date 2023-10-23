@@ -33,7 +33,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="sort" data-sort="customer_name">Booker's Name</th>
-                                                        <th class="sort" data-sort="email">Venue</th>
+                                                        <th class="sort" data-sort="email">Email Address</th>
                                                         <th class="sort" data-sort="phone">Reservation Date</th>
                                                         <th class="sort" data-sort="status">Status</th>
                                                         <th class="sort" data-sort="action">Action</th>
@@ -43,7 +43,7 @@
                                                     @foreach ($data as $booking)
                                                         <tr>
                                                             <td class="customer_name">{{$booking->first_name}} {{$booking->last_name}}</td>
-                                                            <td class="email">{{$booking->venue_name}}</td>
+                                                            <td class="email">{{$booking->email}}</td>
                                                             <td class="phone">{{date('F d, Y', strtotime($booking->reserved_date))}}</td>
                                                             <td class="status">
                                                                 {{$booking->reservation_status}}
@@ -51,7 +51,7 @@
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">
-                                                                        <button class="btn btn-sm btn-success edit-item-btn confirmpayment" id="{{$booking->eventbooking_id}}">Confirm Payment</button>
+                                                                        <button class="btn btn-sm btn-success edit-item-btn confirmpaymentcoordinator" id="{{$booking->coordinatorbooking_id}}">Confirm Payment</button>
                                                                     </div>
                                                                 </div>
                                                             </td>

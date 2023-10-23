@@ -58,6 +58,17 @@
                                                 <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" type="password" name="password_confirmation" />
                                             </span>
                                         </p>
+                                        <p>Member Type (required)</p>
+                                        <p>
+                                            <span class="wpcf7-form-control-wrap" data-name="your-name">
+                                                <select name="membertype" id="membertype" aria-required="true" aria-invalid="false" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required">
+                                                    <option value="Customer">Client</option>
+                                                    <option value="Vendor">Vendor</option>
+                                                    <option value="Event Coordinator">Event Coordinator</option>
+                                                </select>
+                                                
+                                            </span>
+                                        </p>
                                         @if ($errors->any())
                                             <div class="alert alert-danger">
                                                 <ul>

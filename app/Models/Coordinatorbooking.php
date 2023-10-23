@@ -32,4 +32,29 @@ class Coordinatorbooking extends Model
 
     }
 
+    public static function confirmPayment($data){
+
+        DB::table('coordinatorbooking')
+            ->where('coordinatorbooking_id',$data['id'])
+            ->update([
+                'reservation_status' => 'Reserved'
+        ]);
+
+    }
+
+    public static function updateEvent($start_date,$id){
+
+        DB::table('coordinatorbooking')
+            ->where('coordinatorbooking_id',$id)
+            ->update([
+                'reserved_date' => $start_date
+        ]);
+    }
+
+    public static function eventCancel($data){
+        DB::table('coordinatorbooking')
+            ->where('coordinatorbooking',$data['id'])
+            ->delete();
+    }
+
 }

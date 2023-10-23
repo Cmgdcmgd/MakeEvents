@@ -89,6 +89,30 @@ $('.otherphotos').click(function(e){
     $('#otherPhotoLabel').append(otherphoto);
 });
 
+$('.mainphotocoordinator').click(function(e){
+
+e.preventDefault();
+
+var mainphoto = $(this).attr("data-mainphoto");
+
+$('#mainPhotoBody').empty();
+
+$('#mainPhotoBody').append('<img src="mainpage/coordinators/main photos/' + mainphoto + '"width="90%">');
+});
+
+$('.otherphotoscoordinator').click(function(e){
+
+e.preventDefault();
+
+var otherphoto = $(this).attr("id");
+
+$('#otherPhotoBody').empty();
+$('#otherPhotoLabel').empty();
+
+$('#otherPhotoBody').append('<img src="mainpage/coordinators/additional photos/' + otherphoto + '" width="90%">');
+$('#otherPhotoLabel').append(otherphoto);
+});
+
 $('.deletevenue').click(function(e){
 
     e.preventDefault();
@@ -164,6 +188,45 @@ $('.confirmpayment').click(function(e){
             });
         }
     }); 
+})
+
+$('.confirmpaymentcoordinator').click(function(e){
+
+e.preventDefault();
+
+var id = $(this).attr("id");
+
+Swal.fire({
+    title: 'Are you sure?',
+    text: "you want to confirm the payment for this reservation",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes!'
+}).then((willConfirm) => {
+    if (willConfirm.isConfirmed) {
+        Swal.fire(
+            'Confirmed!',
+            'Payment has been confirmed.',
+            'success'
+        ).then((confirmdelete) => {
+            if(confirmdelete){
+                $.ajax({
+                    url: '/confirmpaymentcoordinator',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'HTML',
+                    success: function(response){
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    }
+}); 
 })
 
 </script>

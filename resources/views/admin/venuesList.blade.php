@@ -45,7 +45,6 @@
                                                         <th data-sort="phone">Main Photo</th>
                                                         <th data-sort="phone">Other photos</th>
                                                         <th data-sort="phone">Description</th>
-                                                        <th data-sort="status">Availability</th>
                                                         <th data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
@@ -76,7 +75,6 @@
                                                                 @endfor
                                                             </td>
                                                             <td class="date description" data-description="{{$venues->description}}"><a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal" >Click for Description</a></td>
-                                                            <td class="date">{{$venues->availability}}</td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">

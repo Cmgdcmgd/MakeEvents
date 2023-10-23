@@ -52,7 +52,7 @@ class Eventbooking extends Model
     }
 
     public static function eventCancel($data){
-        DB::table('branch')
+        DB::table('eventbooking')
             ->where('eventbooking_id',$data['id'])
             ->delete();
     }

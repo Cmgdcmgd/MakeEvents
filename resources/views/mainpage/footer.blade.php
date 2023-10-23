@@ -5,10 +5,10 @@
                 <h3 class="gdlr-widget-title">Book Now!</h3>
                 <div class="clear"></div>
                 <div class="textwidget">
-                    <p><i class="gdlr-icon fa fa-phone" style="color: #fff; font-size: 16px; "></i> +1800-222-3333</p>
+                    <p><i class="gdlr-icon fa fa-phone" style="color: #fff; font-size: 16px; "></i> 09136549587</p>
                     <div class="clear"></div>
                     <div class="gdlr-space" style="margin-top: -15px;"></div>
-                    <p><i class="gdlr-icon fa fa-envelope-o" style="color: #fff; font-size: 16px; "></i> sales@hotelmastert.com</p>
+                    <p><i class="gdlr-icon fa fa-envelope-o" style="color: #fff; font-size: 16px; "></i>makeeventsmemorable.com</p>
                     <div class="clear"></div>
                     <div class="gdlr-space" style="margin-top: 25px;"></div>
                     
@@ -18,12 +18,12 @@
         
         <div class="footer-column six columns" id="footer-widget-3">
             <div id="text-10" class="widget widget_text gdlr-item gdlr-widget">
-                <h3 class="gdlr-widget-title">Our Awards</h3>
+                <h3 class="gdlr-widget-title">Our Mision</h3>
                 <div class="clear"></div>
-                <div class="textwidget"><img src="" alt="">
+                <div class="textwidget">
                     <div class="clear"></div>
-                    <div class="gdlr-space" style="margin-top: 20px;"></div>
-                    Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Nullam id dolor id nibh ultricies vehicula ut id elit. Vestibulum.</div>
+                    <div class="gdlr-space"></div>
+                    Our mission is to connect companies with world-class talent with the vision to build a global family that aspires to reach its highest potential.</div>
             </div>
         </div>
         <div class="clear"></div>
@@ -100,6 +100,8 @@
             }
         toastr.success("{{ session()->get('message') }}");
     @endif
+
+    createEditableSelect(document.forms[0].myText)
 
     $('#try').click(function(e){
         Swal.fire({

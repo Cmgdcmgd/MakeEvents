@@ -58,6 +58,7 @@ Route::post('/deletevenue', [Controller::class, 'deletevenue']);
 Route::post('/logincustomer', [Controller::class, 'logincustomer']);
 Route::post('/adminlogin', [Controller::class, 'adminlogin']);
 Route::post('/confirmpayment', [Controller::class, 'confirmpayment']);
+Route::post('/confirmpaymentcoordinator', [Controller::class, 'confirmpaymentcoordinator']);
 Route::post('/coordinatorprofilemanagement', [Controller::class, 'coordinatorprofilemanagement']);
 Route::post('/eventbooking', [Controller::class, 'eventbooking']);
 Route::post('/coordinatorbooking', [Controller::class, 'coordinatorbooking']);
@@ -68,12 +69,15 @@ Route::get('/venuedetails/{id}', [Controller::class, 'venuedetails']);
 Route::get('/allvenues', [Controller::class, 'allvenues']);
 Route::get('/allcoordinators', [Controller::class, 'allcoordinators']);
 Route::get('/eventscalendar', [Controller::class, 'eventscalendar']);
+Route::get('/coordinatorcalendar', [Controller::class, 'coordinatorcalendar']);
 Route::get('/myprofile', [Controller::class, 'myprofile']);
 Route::get('/editprofile', [Controller::class, 'editprofile']);
 Route::get('/aboutus', [Controller::class, 'aboutus']);
 Route::get('/coordinatordetails/{id}', [Controller::class, 'coordinatordetails']);
 Route::patch('/updateevent/{id}', [Controller::class, 'updateevent']);
+Route::patch('/updatecoordinatorevent/{id}', [Controller::class, 'updatecoordinatorevent']);
 Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);
+Route::get('/pendingpaymentscoordinator', [Controller::class, 'pendingpaymentscoordinator']);
 
 
 Route::get('/customerlogout', [Controller::class, 'customerlogout']);

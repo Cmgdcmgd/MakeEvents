@@ -160,7 +160,7 @@ class User extends Authenticatable
                     'email' => $data['email_address'],
                     'password' => Hash::make($data['password']),
                     'contact_number' => $data['contact_number'],
-                    'user_type' => 'Customer',
+                    'user_type' => $data['membertype'],
             ]);
     }
 

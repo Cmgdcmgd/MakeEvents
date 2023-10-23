@@ -17,6 +17,9 @@
                                 <li class="menu-item"><a href="/allcoordinators">Event Coordinators</a></li>
                                 <li class="menu-item"><a href="/aboutus">About Us</a></li>
                                 @if (session('logged') == true)
+                                    <li class="menu-item"><a href="/administrator">Chat</a></li>
+                                @endif
+                                @if (session('logged') == true)
                                     <li class="menu-item"><a href="/myprofile">My Profile</a></li>
                                 @endif
                                 @if (session('logged') == true)
@@ -37,6 +40,9 @@
                             <li class="menu-item"><a href="/allvenues">Event Venues</a></li>
                             <li class="menu-item menu-item gdlr-normal-menu"><a href="/allcoordinators">Event Coordinators</a></li>
                             <li class="menu-item"><a href="/aboutus">About Us</a></li>
+                            @if (session('logged') == true)
+                                    <li class="menu-item"><a href="/administrator">Chat</a></li>
+                                @endif
                             @if (session('logged') == true)
                                     <li class="menu-item"><a href="/myprofile">My Profile</a></li>
                                 @endif

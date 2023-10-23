@@ -62,10 +62,10 @@
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">
-                                                                        <a href="/useredit/{{$users->user_id}}"><button class="btn btn-sm btn-success edit-item-btn">Edit</button></a>
+                                                                        <a href="/useredit/{{$users->id}}"><button class="btn btn-sm btn-success edit-item-btn">Edit</button></a>
                                                                     </div>
                                                                     <div class="remove">
-                                                                        <button class="btn btn-sm btn-danger remove-item-btn deleteuser" id="{{$users->user_id}}">Delete</button>
+                                                                        <button class="btn btn-sm btn-danger remove-item-btn deleteuser" id="{{$users->id}}">Delete</button>
                                                                     </div>
                                                                 </div>
                                                             </td>
