@@ -669,6 +669,7 @@ class Controller extends BaseController
 
     public function editcustomer(Request $data){
 
+
         if(!empty($data['profpic'])){
             $file = $data->file('profpic');
             $file->move(base_path('\public\admin\images\users'), $file->getClientOriginalName());
