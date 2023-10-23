@@ -100,8 +100,6 @@ class Controller extends BaseController
             'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
             'contact_number'=> 'required',
             'email' => 'required|email|',
-            'password' => 'confirmed|min:8',
-            'password_confirmation' => 'min:8',
             'user_type' => 'required',
         ],
         [
