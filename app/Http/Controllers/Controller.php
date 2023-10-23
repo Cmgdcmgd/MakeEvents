@@ -36,6 +36,7 @@ class Controller extends BaseController
             session(['name' => $authenticateduser->name]);
             session(['user_type' => $authenticateduser->user_type]);
             session(['userid' => auth()->user()->id]);
+            session(['profpic' => $authenticateduser->profile_picture]);
         
             return view('admin.dashboard');
         }
@@ -412,6 +413,7 @@ class Controller extends BaseController
             $request = User::where('email',$data['email'])->first();
             $data->session()->put('logged', true);
             $data->session()->put('user_id', $request->user_id);
+            
 
             return redirect('/dashboard')->with('message', 'Welcome!');
         }
