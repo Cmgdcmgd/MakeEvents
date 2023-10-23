@@ -55,6 +55,7 @@ Route::post('/edituser', [Controller::class, 'editUser']);
 Route::post('/editvenue', [Controller::class, 'editvenue']);
 Route::post('/deleteuser', [Controller::class, 'deleteUser']);
 Route::post('/deletevenue', [Controller::class, 'deletevenue']);
+Route::post('/filtervenues', [Controller::class, 'filtervenues']);
 Route::post('/logincustomer', [Controller::class, 'logincustomer']);
 Route::post('/adminlogin', [Controller::class, 'adminlogin']);
 Route::post('/confirmpayment', [Controller::class, 'confirmpayment']);
