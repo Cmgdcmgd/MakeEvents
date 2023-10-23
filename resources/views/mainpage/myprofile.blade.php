@@ -31,7 +31,13 @@
                                         <div class="gdlr-item gdlr-personnel-item plain-style">
                                             <div class="gdlr-ux gdlr-personnel-ux">
                                                 <div class="personnel-item">
-                                                    <div class="personnel-author-image gdlr-skin-border"><img src="{{asset('mainpage/upload/profile.png')}}" alt=""></div>
+                                                    <div class="personnel-author-image gdlr-skin-border">
+                                                        @if(!empty(session('profpic')))
+                                                            <img src="{{asset('admin/images/users/'.session('profpic'))}}" alt="">
+                                                        @else
+                                                            <img src="{{asset('mainpage/upload/profile.png')}}" alt="">
+                                                        @endif
+                                                    </div>
                                                     <div class="personnel-info">
                                                         <div class="personnel-author gdlr-skin-title">{{$user->first_name}} {{$user->last_name}}</div>
                                                     </div>

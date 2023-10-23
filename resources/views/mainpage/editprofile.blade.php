@@ -41,10 +41,28 @@
                                                 <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" type="email" name="email_address" value="{{$user->email}}"/>
                                             </span>
                                         </p>
+                                        <p>Password</p>
+                                        <p>
+                                            <span class="wpcf7-form-control-wrap" data-name="your-name">
+                                                <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="false" aria-invalid="false" type="password" name="password" />
+                                            </span>
+                                        </p>
+                                        <p>Confirm Password</p>
+                                        <p>
+                                            <span class="wpcf7-form-control-wrap" data-name="your-name">
+                                                <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="false" aria-invalid="false" type="password" name="password_confirmation" />
+                                            </span>
+                                        </p>
                                         <p>Contact Number (required)</p>
                                         <p>
                                             <span class="wpcf7-form-control-wrap" data-name="your-name">
                                                 <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" type="text" name="contact_number" value="{{$user->contact_number}}"/>
+                                            </span>
+                                        </p>
+                                        <p>Profile Picture</p>
+                                        <p>
+                                            <span class="wpcf7-form-control-wrap" data-name="your-name">
+                                                <input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="false" name="profpic" aria-invalid="false" type="file" accept="image/*" id="profpic"/>
                                             </span>
                                         </p>
                                         @if ($errors->any())

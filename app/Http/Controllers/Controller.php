@@ -357,6 +357,7 @@ class Controller extends BaseController
             $request = User::where('email',$data['email'])->first();
             $data->session()->put('logged', true);
             $data->session()->put('user_id', $request->id);
+            $data->session()->put('profpic', $request->profile_picture);
 
             return redirect('/')->with('message', 'Welcome!');
         }
@@ -667,6 +668,11 @@ class Controller extends BaseController
     }
 
     public function editcustomer(Request $data){
+
+        if(!empty($data['profpic'])){
+            $file = $data->file('profpic');
+            $file->move(base_path('\public\admin\images\users'), $file->getClientOriginalName());
+        }
 
         User::editCustomer($data);
 

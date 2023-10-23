@@ -200,15 +200,63 @@ class User extends Authenticatable
 
     public static function editCustomer($data){
 
-        DB::table('users')
-                ->where('id',$data['user_id'])
-                ->update([
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'name' => $data['first_name']." ".$data['last_name'],
-                    'email' => $data['email_address'],
-                    'contact_number' => $data['contact_number'],
-            ]);
+        if(!empty($data['profpic'])){
 
+            $file = $data->file('profpic')->getClientOriginalName();
+
+            if(!empty($data['password'])){
+
+                DB::table('users')
+                    ->where('id',$data['user_id'])
+                    ->update([
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'name' => $data['first_name']." ".$data['last_name'],
+                        'email' => $data['email_address'],
+                        'password' => Hash::make($data['password']),
+                        'contact_number' => $data['contact_number'],
+                        'profile_picture' => $file
+                ]);
+            }
+            else{
+                DB::table('users')
+                    ->where('id',$data['user_id'])
+                    ->update([
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'name' => $data['first_name']." ".$data['last_name'],
+                        'email' => $data['email_address'],
+                        'contact_number' => $data['contact_number'],
+                        'profile_picture' => $file
+                ]);
+            }
+        }
+        else{
+            
+            if(!empty($data['password'])){
+                DB::table('users')
+                    ->where('id',$data['user_id'])
+                    ->update([
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'name' => $data['first_name']." ".$data['last_name'],
+                        'email' => $data['email_address'],
+                        'password' => Hash::make($data['password']),
+                        'contact_number' => $data['contact_number'],
+                ]);
+            }
+            else{
+                DB::table('users')
+                    ->where('id',$data['user_id'])
+                    ->update([
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'name' => $data['first_name']." ".$data['last_name'],
+                        'email' => $data['email_address'],
+                        'contact_number' => $data['contact_number'],
+                ]);
+            }
+            
+        }
     }
 }
