@@ -44,7 +44,7 @@
                                             <input class="wpcf7-form-control wpcf7-submit" type="submit" value="Submit"><div style="float: right"></div><a href="/register" class="wpcf7-form-control wpcf7-submit" value="Register">Don't have an account yet? Register here</a>
                                         </p>
                                         <p>
-                                            <a href="/administrator" class="wpcf7-form-control wpcf7-submit" value="Register">Login as admin here</a>
+                                            <a href="/administrator" class="wpcf7-form-control wpcf7-submit" value="Register">Vendor and Event Coordinator Login</a>
                                         </p>
                                     </form>
                                 </div>
