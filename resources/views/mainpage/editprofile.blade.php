@@ -11,7 +11,7 @@
                             <p>
                                 <div class="clear"></div>
                                 <div class="gdlr-space" style="margin-top: -22px;"></div>
-                                <h5 class="gdlr-heading-shortcode "  style="font-weight: bold;" >Register </h5>
+                                <h5 class="gdlr-heading-shortcode "  style="font-weight: bold;" >Edit Profile </h5>
                                 <div class="clear"></div>
                                 <div class="gdlr-space" style="margin-top: 25px;"></div>
 

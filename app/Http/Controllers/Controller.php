@@ -481,6 +481,8 @@ class Controller extends BaseController
 
     public function eventscalendar(){
 
+        
+
         $bookings = DB::table('eventbooking')
                     ->join('venues','eventbooking.venue_id','=','venues.venue_id')
                     ->join('users','eventbooking.user_id','=','users.id')
@@ -489,18 +491,24 @@ class Controller extends BaseController
                     ->where('venues.user_id',session('userid'))
                     ->get();
 
-        foreach($bookings as $booking){
-            $events[] = [
-                'id' => $booking->eventbooking_id,
-                'title' => $booking->first_name." ".$booking->last_name,
-                'reserved' => $booking->reserved_date,
-                'email' => $booking->email,
-                'start' => $booking->reserved_date,
-                'location' => $booking->location,
-                'phone' =>$booking->contact_number,
-                'end' => $booking->reserved_date
-            ];
+        if(count($bookings) >= 1){
+            foreach($bookings as $booking){
+                $events[] = [
+                    'id' => $booking->eventbooking_id,
+                    'title' => $booking->first_name." ".$booking->last_name,
+                    'reserved' => $booking->reserved_date,
+                    'email' => $booking->email,
+                    'start' => $booking->reserved_date,
+                    'location' => $booking->location,
+                    'phone' =>$booking->contact_number,
+                    'end' => $booking->reserved_date
+                ];
+            }
         }
+        else{
+            $events = [];
+        }
+        
 
         return view('admin.eventscalendar', compact('events'));
     }
