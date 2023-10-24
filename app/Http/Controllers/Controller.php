@@ -114,7 +114,10 @@ class Controller extends BaseController
 
         if(!empty($data['profpic'])){
            
-            $file->move(public_path('admin/images/users'), $file->getClientOriginalName());
+            $file = $request->file('profpic');
+            $fileName = $file->getClientOriginalName();
+            
+            $request->file('profpic')->store('public', $fileName);
         }
 
         User::editUser($data);
