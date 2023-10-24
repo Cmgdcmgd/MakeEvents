@@ -20,6 +20,7 @@ $('.deleteuser').click(function(e){
     e.preventDefault();
 
     var id = $(this).attr("id");
+    
     Swal.fire({
         title: 'Are you sure?',
         text: "you want to delete this user?",

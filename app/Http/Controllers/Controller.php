@@ -147,7 +147,7 @@ class Controller extends BaseController
 
     public function deleteUser(Request $data){
 
-        User::where('user_id',$data['id'])->delete();
+        DB::table('users')->where('id', $data['id'])->delete();
 
     }
 
@@ -251,7 +251,6 @@ class Controller extends BaseController
     public function deleteVenue(Request $data){
 
         DB::table('venues')->where('venue_id', $data['id'])->delete();
-
 
     }
 
