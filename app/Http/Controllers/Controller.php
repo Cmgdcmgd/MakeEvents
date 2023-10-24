@@ -674,10 +674,13 @@ class Controller extends BaseController
         $profpic = session('profpic');
 
         if(!empty($data['profpic'])){
-            $file = $data->file('profpic');
-            $file->move(base_path('\public\admin\images\users'), $file->getClientOriginalName());
+           
+            $file = $request->file('profpic');
+            $fileName = $file->getClientOriginalName();
+            
+            $request->file('profpic')->store('public', $fileName);
 
-            $profpic = $file->getClientOriginalName();
+            $profpic = $fileName;
         }
 
         User::editCustomer($data);
