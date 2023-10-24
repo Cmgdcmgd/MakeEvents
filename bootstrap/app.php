@@ -25,7 +25,7 @@ $app = new Illuminate\Foundation\Application(
 | incoming requests to this application from both the web and CLI.
 |
 */
-$app->usePublicPath(realpath(base_path('/../public_html')));
+$app->usePublicPath(realpath(base_path('public_html')));
 
 
 $app->singleton(
