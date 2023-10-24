@@ -678,7 +678,7 @@ class Controller extends BaseController
             $file = $data->file('profpic');
             $fileName = $file->getClientOriginalName();
             
-            $data->file('profpic')->store('public', $fileName);
+            $data->file('profpic')->storeAs('public', $fileName);
 
             $profpic = $fileName;
         }
