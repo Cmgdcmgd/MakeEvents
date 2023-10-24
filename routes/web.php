@@ -41,6 +41,9 @@ Route::get('/customerlogin', function () {
     return view('mainpage.login');
 });
 
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
 
 Route::get('/dashboard', [Controller::class, 'dashboard']);
