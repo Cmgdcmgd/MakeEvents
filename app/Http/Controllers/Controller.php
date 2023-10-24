@@ -70,7 +70,7 @@ class Controller extends BaseController
 
         if(!empty($data['profpic'])){
             $file = $data->file('profpic');
-            $file->move(public_path('\public\admin\images\users'), $file->getClientOriginalName());
+            $file->move(public_path('/admin/images/users'), $file->getClientOriginalName());
         }
 
         User::addUser($data);
@@ -154,13 +154,13 @@ class Controller extends BaseController
     public function addvenue(Request $data){
 
         $mainPhoto = $data->file('main_photo');
-        $mainPhoto->move(public_path('\public\mainpage\main photos'), $mainPhoto->getClientOriginalName());
+        $mainPhoto->move(public_path('/mainpage/main photos'), $mainPhoto->getClientOriginalName());
         $mainPhotoName = $mainPhoto->getClientOriginalName();
 
         $additionalPics = [];
         
         foreach($data->file('additional_photos') as $file){
-            $file->move(public_path('\public\mainpage\additional photos'), $file->getClientOriginalName());
+            $file->move(public_path('/mainpage/additional photos'), $file->getClientOriginalName());
             array_push($additionalPics,$file->getClientOriginalName());
         }
 
@@ -221,7 +221,7 @@ class Controller extends BaseController
             File::delete("mainpage/main photos/".$mainphoto->main_photo);
 
             $mainPhoto = $data->file('main_photo');
-            $mainPhoto->move(public_path('\public\mainpage\main photos'), $mainPhoto->getClientOriginalName());
+            $mainPhoto->move(public_path('/mainpage/main photos'), $mainPhoto->getClientOriginalName());
 
         }
 
@@ -237,7 +237,7 @@ class Controller extends BaseController
             $additionalPics = [];
         
             foreach($data->file('additional_photos') as $file){
-                $file->move(public_path('\public\mainpage\additional photos'), $file->getClientOriginalName());
+                $file->move(public_path('/mainpage/additional photos'), $file->getClientOriginalName());
             }
 
         }
@@ -289,20 +289,20 @@ class Controller extends BaseController
 
         if(!empty($data['profpic'])){
             $file = $data->file('profpic');
-            $file->move(public_path('\public\admin\images\users'), $file->getClientOriginalName());
+            $file->move(public_path('/admin/images/users'), $file->getClientOriginalName());
         }
 
         if(!empty($data['main_photo'])){
 
             $mainPhoto = $data->file('main_photo');
-            $mainPhoto->move(public_path('\public\mainpage\coordinators\main photos'), $mainPhoto->getClientOriginalName());
+            $mainPhoto->move(public_path('/mainpage/coordinators/main photos'), $mainPhoto->getClientOriginalName());
 
         }
 
         if(!empty($data['additional_photos'])){
         
             foreach($data->file('additional_photos') as $file){
-                $file->move(public_path('\public\mainpage\coordinators\additional photos'), $file->getClientOriginalName());
+                $file->move(public_path('/mainpage/coordinators/additional photos'), $file->getClientOriginalName());
             }
         }
 
