@@ -94,34 +94,53 @@ class Controller extends BaseController
     }
 
     public function editUser(Request $data){
-        
-        $data->validate([
-            'first_name' => 'required|regex:/^[\pL\s\-]+$/u',
-            'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
-            'contact_number'=> 'required',
-            'email' => 'required|email|',
-            'user_type' => 'required',
-        ],
-        [
-            'first_name.required' => 'First Name is required',
-            'last_name.required' => 'Last Name is required',
-            'contact_number.required' => 'Contact number is required',
-            'email.required' => 'Email Address is required',
-            'email.email' => 'Please input a valid email address',
-            'email.unique' => 'User already existing. Please input a different email address.',
-            'user_type.required' => 'User Type is required'
-        ]);
 
-        if(!empty($data['profpic'])){
-           
-            $file = $data->file('profpic');
-            $fileName = $file->getClientOriginalName();
-            
-            $data->file('profpic')->store('public', $fileName);
+        if($data['user_type'] == "Administrator"){
+
+            if(!empty($data['profpic'])){
+
+                $file = $data->file('profpic');
+                $fileName = $file->getClientOriginalName();
+    
+                $data->file('profpic')->move(public_path('/admin/images/users'), $fileName);
+                
+            }
+    
+            User::editUser($data);
+    
+        }
+        else{
+
+            $data->validate([
+                'first_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'contact_number'=> 'required',
+                'email' => 'required|email|',
+                'user_type' => 'required',
+            ],
+            [
+                'first_name.required' => 'First Name is required',
+                'last_name.required' => 'Last Name is required',
+                'contact_number.required' => 'Contact number is required',
+                'email.required' => 'Email Address is required',
+                'email.email' => 'Please input a valid email address',
+                'email.unique' => 'User already existing. Please input a different email address.',
+                'user_type.required' => 'User Type is required'
+            ]);
+
+            if(!empty($data['profpic'])){
+
+                $file = $data->file('profpic');
+                $fileName = $file->getClientOriginalName();
+    
+                $data->file('profpic')->move(public_path('/admin/images/users'), $fileName);
+                
+            }
+        
+            User::editUser($data);
         }
 
-        User::editUser($data);
-
+        
         return redirect('/userslist')->with('message', 'User successfully edited!');
 
     }
