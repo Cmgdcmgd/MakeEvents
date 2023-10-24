@@ -186,16 +186,23 @@ class User extends Authenticatable
 
     public static function addCustomer($data){
 
-        DB::table('users')
+        $userid = DB::table('users')
+                        ->insertGetId([
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'name' => $data['first_name']." ".$data['last_name'],
+                        'email' => $data['email_address'],
+                        'password' => Hash::make($data['password']),
+                        'contact_number' => $data['contact_number'],
+                        'user_type' => $data['membertype'],
+                    ]);
+        
+        if($data['membertype'] == "Event Coordinator"){
+            DB::table('coordinators')
                 ->insert([
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'name' => $data['first_name']." ".$data['last_name'],
-                    'email' => $data['email_address'],
-                    'password' => Hash::make($data['password']),
-                    'contact_number' => $data['contact_number'],
-                    'user_type' => $data['membertype'],
-            ]);
+                    'user_id' => $userid
+                ]);
+        }
     }
 
     public static function editCustomer($data){

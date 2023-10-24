@@ -114,10 +114,10 @@ class Controller extends BaseController
 
         if(!empty($data['profpic'])){
            
-            $file = $request->file('profpic');
+            $file = $data->file('profpic');
             $fileName = $file->getClientOriginalName();
             
-            $request->file('profpic')->store('public', $fileName);
+            $data->file('profpic')->store('public', $fileName);
         }
 
         User::editUser($data);
@@ -401,6 +401,7 @@ class Controller extends BaseController
         ]);
 
         User::addCustomer($data);
+
         
         return redirect('/customerlogin')->with('message', 'Successfully Registered');
     }
@@ -632,10 +633,12 @@ class Controller extends BaseController
                         ->get();
             }
             else{
+
                 $data = DB::table('venues')
-                        ->select('*')
                         ->where('price', '<=', $request['maxprice'])
+                        ->select('*')
                         ->get();
+
             }
         }
         else{
@@ -651,6 +654,8 @@ class Controller extends BaseController
                         ->get();
             }
         }
+
+        
 
         return view('mainpage.allevents',compact('data'));
     }
