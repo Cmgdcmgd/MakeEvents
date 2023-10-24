@@ -250,7 +250,8 @@ class Controller extends BaseController
 
     public function deleteVenue(Request $data){
 
-        Venue::where('venue_id',$data['id'])->delete();
+        DB::table('venues')->where('venue_id', $data['id'])->delete();
+
 
     }
 
