@@ -678,7 +678,7 @@ class Controller extends BaseController
             $file = $data->file('profpic');
             $fileName = $file->getClientOriginalName();
             
-            $data->file('profpic')->storeAs('admin/images/users', $fileName);
+            $data->file('profpic')->move_uploaded_file(public_path('/admin/images/users'), $fileName);
 
             $profpic = $fileName;
         }
