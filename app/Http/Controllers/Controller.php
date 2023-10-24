@@ -675,10 +675,10 @@ class Controller extends BaseController
 
         if(!empty($data['profpic'])){
            
-            $file = $request->file('profpic');
+            $file = $data->file('profpic');
             $fileName = $file->getClientOriginalName();
             
-            $request->file('profpic')->store('public', $fileName);
+            $data->file('profpic')->store('public', $fileName);
 
             $profpic = $fileName;
         }
