@@ -377,6 +377,7 @@ class Controller extends BaseController
 
             $request = User::where('email',$data['email'])->first();
             $data->session()->put('logged', true);
+            $data->session()->put('user_type', $request->user_type);
             $data->session()->put('user_id', $request->id);
             $data->session()->put('profpic', $request->profile_picture);
 
