@@ -13,6 +13,7 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">User Edit</h4>
                             </div><!-- end card header -->
+                            
                             <div class="card-body">
                                 <div class="live-preview">
                                     <form action="/edituser" method="POST" enctype="multipart/form-data">
@@ -22,7 +23,7 @@
                                                 <div>
                                                     <label for="first_name" class="form-label">First Name</label>
                                                     <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control" id="first_name">
-                                                    <input type="hidden" name="user_id" value="{{$user->user_id}}">
+                                                    <input type="hidden" name="user_id" value="{{$user->id}}">
                                                 </div>
                                             </div>
                                             <!--end col-->

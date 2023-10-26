@@ -44,10 +44,15 @@
 <script src="{{asset('admin/libs/list.js/list.min.js')}}"></script>
 <script src="{{asset('admin/libs/list.pagination.js/list.pagination.min.js')}}"></script>
 
-<!-- listjs init -->
-<script src="{{asset('admin/js/pages/listjs.init.js')}}"></script>
+<!--datatable js-->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 
-
+<script src="{{asset('admin/js/pages/datatables.init.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

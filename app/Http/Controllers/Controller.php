@@ -95,6 +95,7 @@ class Controller extends BaseController
 
     public function editUser(Request $data){
 
+
         if($data['user_type'] == "Administrator"){
 
             if(!empty($data['profpic'])){
@@ -128,6 +129,7 @@ class Controller extends BaseController
                 'user_type.required' => 'User Type is required'
             ]);
 
+
             if(!empty($data['profpic'])){
 
                 $file = $data->file('profpic');
@@ -141,7 +143,7 @@ class Controller extends BaseController
         }
 
         
-        return redirect('/userslist')->with('message', 'User successfully edited!');
+        return redirect('/dashboard')->with('message', 'User successfully edited!');
 
     }
 
