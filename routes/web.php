@@ -41,6 +41,10 @@ Route::get('/customerlogin', function () {
     return view('mainpage.login');
 });
 
+Route::get('/videocall', function () {
+    return view('videocall.pages.call');
+});
+
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });

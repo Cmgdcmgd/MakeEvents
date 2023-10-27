@@ -63,6 +63,7 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
+                    <a href="/videocall"><i class="fas fa-video"></i></a>
                     @if(session('user_type') == "Administrator" || session('user_type') == "Event Coordinator" || session('user_type') == "Vendor")
                         <a href="/dashboard"><i class="fas fa-home"></i></a>
                     @endif
