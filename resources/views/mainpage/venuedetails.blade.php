@@ -74,7 +74,7 @@
                                             </div>
 
                                             <div class="gdlr-room-content">
-                                                <h5>Room Details</h5>
+                                                <h5>Details</h5>
                                                 <p>{{ $data->description }}</p>
                                                 <div class="clear"></div>
                                                 <div class="gdlr-space" style="margin-top: 40px;"></div>

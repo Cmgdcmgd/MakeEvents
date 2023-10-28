@@ -76,7 +76,7 @@
                                 @if(session('user_type') == "Event Coordinator")
                                 <div class="col-xl-3 col-md-6">
                                     <!-- card -->
-                                    <a href="/coordinatorlist">
+                                    <a href="/coordinatorslist">
                                         <div class="card card-animate">
                                             <div class="card-body">
                                                 
