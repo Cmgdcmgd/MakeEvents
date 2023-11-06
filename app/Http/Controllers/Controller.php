@@ -277,11 +277,25 @@ class Controller extends BaseController
 
     public function coordinatoredit($id){
 
-        $coordinator = DB::table('coordinators')
+
+        if(session('user_type') == "Administrator"){
+            
+            $coordinator = DB::table('coordinators')
+                ->join('users','users.id','=','coordinators.user_id')
+                ->select('coordinators.*','users.*')
+                ->where('coordinators.user_id',$id)
+                ->first();
+
+        }
+        else{
+
+            $coordinator = DB::table('coordinators')
                 ->join('users','users.id','=','coordinators.user_id')
                 ->select('coordinators.*','users.*')
                 ->where('coordinators.user_id',session('userid'))
                 ->first();
+        }
+
         
         
         return view('admin.coordinatorEdit',compact('coordinator'));
