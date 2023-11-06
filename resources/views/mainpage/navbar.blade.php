@@ -42,7 +42,10 @@
                             <li class="menu-item"><a href="/aboutus">About Us</a></li>
                             @if (session('logged') == true)
                                     <li class="menu-item"><a href="/dashboard">Chat</a></li>
-                                @endif
+                            @endif
+                            @if (session('logged') == true)
+                                    <li class="menu-item"><a href="/videocall">Virtual Meeting Room</a></li>
+                            @endif
                             @if (session('logged') == true)
                                     <li class="menu-item"><a href="/myprofile">My Profile</a></li>
                                 @endif
