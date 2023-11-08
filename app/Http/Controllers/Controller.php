@@ -186,8 +186,16 @@ class Controller extends BaseController
     }
 
     public function venuedetails($id){
+
+        $data = DB::table('venues')
+                ->join('users','users.id','=','venues.user_id')
+                ->select('users.*','venues.*')
+                ->where('venues.venue_id',$id)
+                ->first();
+
         
-        $data = Venues::where('venue_id',$id)->first();
+        
+        // $data = Venues::where('venue_id',$id)->first();
 
         return view('mainpage.venuedetails',compact('data'));
     }

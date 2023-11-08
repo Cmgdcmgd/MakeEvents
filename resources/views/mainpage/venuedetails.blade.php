@@ -149,7 +149,8 @@
                                                 <p><strong>Location</strong></p>
                                                 <p>Address: {{ $data->location }}<br />
                                                     Phone: {{ $data->contact_number }}<br />
-                                                    Email: {{ $data->email_address }}
+                                                    Email: {{ $data->email_address }} <br/>
+                                                    Contact Person: {{$data->first_name}} {{$data->last_name}}
                                                 </p>
 
                                             </div>
