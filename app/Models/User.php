@@ -91,7 +91,23 @@ class User extends Authenticatable
 
             $file = $data->file('profpic')->getClientOriginalName();
 
-            if(!empty($data['password'])){
+            if(is_null($data['password'])){
+
+                DB::table('users')
+                ->where('id',$data['user_id'])
+                ->update([
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'name' => $data['first_name']." ".$data['last_name'],
+                    'email' => $data['email'],
+                    'contact_number' => $data['contact_number'],
+                    'user_type' => $data['user_type'],
+                    'profile_picture' => $file
+                ]);
+
+                
+            }
+            else{
 
                 DB::table('users')
                 ->where('id',$data['user_id'])
@@ -101,19 +117,6 @@ class User extends Authenticatable
                     'name' => $data['first_name']." ".$data['last_name'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
-                    'contact_number' => $data['contact_number'],
-                    'user_type' => $data['user_type'],
-                    'profile_picture' => $file
-                ]);
-            }
-            else{
-                DB::table('users')
-                ->where('id',$data['user_id'])
-                ->update([
-                    'first_name' => $data['first_name'],
-                    'last_name' => $data['last_name'],
-                    'name' => $data['first_name']." ".$data['last_name'],
-                    'email' => $data['email'],
                     'contact_number' => $data['contact_number'],
                     'user_type' => $data['user_type'],
                     'profile_picture' => $file
@@ -123,7 +126,8 @@ class User extends Authenticatable
         }
         else{
 
-            if(!empty($data['password'])){
+            if(is_null($data['password'])){
+
                 DB::table('users')
                 ->where('id',$data['user_id'])
                 ->update([
@@ -131,10 +135,10 @@ class User extends Authenticatable
                     'last_name' => $data['last_name'],
                     'name' => $data['first_name']." ".$data['last_name'],
                     'email' => $data['email'],
-                    'password' => Hash::make($data['password']),
                     'contact_number' => $data['contact_number'],
                     'user_type' => $data['user_type'],
                 ]);
+
             }
             else{
                 DB::table('users')
