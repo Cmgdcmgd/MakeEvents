@@ -11,7 +11,13 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">User Edit</h4>
+                                @if(session('user_type') == "Event Coordinator")
+                                    <h4 class="card-title mb-0 flex-grow-1">Edit Event Coordinator Profile</h4>
+                                @endif
+                                @if(session('user_type') == "Administrator")
+                                    <h4 class="card-title mb-0 flex-grow-1">User Edit</h4>
+                                @endif
+                                
                             </div><!-- end card header -->
                             
                             <div class="card-body">
@@ -24,6 +30,7 @@
                                                     <label for="first_name" class="form-label">First Name</label>
                                                     <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control" id="first_name">
                                                     <input type="hidden" name="user_id" value="{{$user->id}}">
+                                                    <input type="hidden" name="user_type" value="{{$user->user_type}}">
                                                 </div>
                                             </div>
                                             <!--end col-->
@@ -60,16 +67,6 @@
                                                     <label for="contact_number" class="form-label">Contact Number</label>
                                                     <input type="text" name="contact_number" value="{{$user->contact_number}}" class="form-control" id="contact_number">
                                                 </div>
-                                            </div>
-                                            <div class="col-xxl-6 col-md-6">
-                                                <label for="usertype" class="form-label">User Type</label>
-                                                <select class="form-select mb-3" name="user_type" aria-label="Default select example" id="usertype">
-                                                    <option selected disabled></option>
-                                                    <option value="Administrator" @if($user->user_type == 'Administrator') selected @endif>Administrator</option>
-                                                    <option value="Vendor" @if($user->user_type == 'Vendor') selected @endif>Vendor</option>
-                                                    <option value="Event Coordinator" @if($user->user_type == 'Event Coordinator') selected @endif>Event Coordinator</option>
-                                                    <option value="Customer" @if($user->user_type == 'Customer') selected @endif>Customer</option>
-                                                </select>
                                             </div>
                                             <!--end col-->
                                             <div class="col-xxl-6 col-md-6">

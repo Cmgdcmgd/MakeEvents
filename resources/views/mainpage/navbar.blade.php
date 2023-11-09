@@ -13,7 +13,7 @@
                             <button class="dl-trigger">Open Menu</button>
                             <ul id="menu-main-menu" class="dl-menu gdlr-main-mobile-menu">
                                 <li class="menu-item current-menu-item "><a href="/">Home</a></li>
-                                <li class="menu-item"><a href="/allvenues">Event Venues</a></li>
+                                <li class="menu-item"><a href="/allvenues">Vendors</a></li>
                                 <li class="menu-item"><a href="/allcoordinators">Event Coordinators</a></li>
                                 <li class="menu-item"><a href="/aboutus">About Us</a></li>
                                 @if (session('logged') == true)
@@ -37,7 +37,7 @@
                     <nav class="gdlr-navigation" id="gdlr-main-navigation" role="navigation">
                         <ul id="menu-main-menu-1" class="sf-menu gdlr-main-menu">
                             <li class="menu-item current-menu-item menu-item current-menu-item  gdlr-normal-menu"><a href="/">Home</a></li>
-                            <li class="menu-item"><a href="/allvenues">Event Venues</a></li>
+                            <li class="menu-item"><a href="/allvenues">Vendors</a></li>
                             <li class="menu-item menu-item gdlr-normal-menu"><a href="/allcoordinators">Event Coordinators</a></li>
                             <li class="menu-item"><a href="/aboutus">About Us</a></li>
                             @if (session('logged') == true)

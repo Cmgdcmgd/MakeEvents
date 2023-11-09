@@ -134,10 +134,10 @@
                             <div class="container">
                                 <div class="gdlr-item-title-wrapper gdlr-item pos-center gdlr-nav-container ">
                                     <div class="gdlr-item-title-head">
-                                        <h3 class="gdlr-item-title gdlr-skin-title gdlr-skin-border">Event Venues</h3>
+                                        <h3 class="gdlr-item-title gdlr-skin-title gdlr-skin-border">Vendors</h3>
                                         <div class="gdlr-item-title-carousel"><i class="icon-angle-left gdlr-flex-prev"></i><i class="icon-angle-right gdlr-flex-next"></i></div>
                                         <div class="clear"></div>
-                                    </div><a class="gdlr-item-title-link" href="/allvenues">View All Venues<i class="fa fa-long-arrow-right icon-long-arrow-right"></i></a></div>
+                                    </div><a class="gdlr-item-title-link" href="/allvenues">View Vendors<i class="fa fa-long-arrow-right icon-long-arrow-right"></i></a></div>
                                 <div class="room-item-wrapper type-modern">
                                     <div class="room-item-holder ">
                                         <div class="gdlr-room-carousel-item gdlr-item">

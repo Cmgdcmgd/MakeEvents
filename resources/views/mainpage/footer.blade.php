@@ -23,7 +23,7 @@
                 <div class="textwidget">
                     <div class="clear"></div>
                     <div class="gdlr-space"></div>
-                    Our mission is to connect companies with world-class talent with the vision to build a global family that aspires to reach its highest potential.</div>
+                    Our mission is to revolutionize the way social events are planned and organized. MakeEventsMemorable connects people who share common interests through virtual coordination. Meet and book your suppliers, as well as hire an event coordinator, to make your event the best and most unforgettable of your life. </div>
             </div>
         </div>
         <div class="clear"></div>

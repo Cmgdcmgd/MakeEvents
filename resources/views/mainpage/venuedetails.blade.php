@@ -39,15 +39,6 @@
                                                 </div>
                                                 <input type="hidden" name="user_id" value="{{session('user_id')}}">
                                                 <input type="hidden" name="venue_id" value="{{$data->venue_id}}">
-                                                <div class="gdlr-reservation-field gdlr-resv-combobox gdlr-resv-night">
-                                                    <span class="gdlr-reservation-field-title">Days</span>
-                                                    <div class="gdlr-combobox-wrapper"><select name="days"
-                                                            id="gdlr-night">
-                                                            <option value="1" selected>1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                        </select></div>
-                                                </div>
                                                 @if(session('logged') == true)
                                                     <a href="#" class="gdlr-reservation-bar-button gdlr-button with-border" id="try">Reserve Now</a>
                                                 @else

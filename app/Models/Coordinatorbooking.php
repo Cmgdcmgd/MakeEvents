@@ -53,7 +53,7 @@ class Coordinatorbooking extends Model
 
     public static function eventCancel($data){
         DB::table('coordinatorbooking')
-            ->where('coordinatorbooking',$data['id'])
+            ->where('coordinatorbooking_id',$data['id'])
             ->delete();
     }
 

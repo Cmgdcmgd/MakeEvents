@@ -609,6 +609,10 @@ class Controller extends BaseController
         Eventboking::eventCancel($data);
     }
 
+    public function coordinatoreventcancel(Request $data){
+        Coordinatorbooking::eventCancel($data);
+    }
+
     public function updatecoordinatorevent(Request $request ,$id){
 
         $booking = Coordinatorbooking::where('coordinatorbooking_id',$id);

@@ -32,7 +32,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>New Venue</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Create Vendor Profile</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
@@ -56,7 +56,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Venue List</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Vendor Listing</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
@@ -82,7 +82,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Coordinator List</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Event Coordinator Listing</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
@@ -160,7 +160,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Events Calendar</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Clients Events Calendar</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
@@ -186,7 +186,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Events Calendar</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Clients Events Calendar</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
@@ -211,7 +211,7 @@
                                                 
                                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                                     <div>
-                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Live Chat</h4>
+                                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="559.25"></span>Chat Room</h4>
                                                         
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">

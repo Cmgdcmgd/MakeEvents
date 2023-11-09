@@ -92,10 +92,10 @@
                         <div class="collapse menu-dropdown" id="sidebarApps">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="/newvenue" class="nav-link"> New Venue </a>
+                                    <a href="/newvenue" class="nav-link"> Create Vendor Profile </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/venueslist" class="nav-link"> Venue list </a>
+                                    <a href="/venueslist" class="nav-link"> Vendor listing </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/pendingpayments" class="nav-link"> Pending Payments </a>
@@ -104,7 +104,10 @@
                                     <a href="/eventscalendar" class="nav-link"> Clients Events Calendar </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/chatify" class="nav-link"> Chat </a>
+                                    <a href="/chatify" class="nav-link"> Chat Room</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/videocall" class="nav-link"> Virtual Meeting Room</a>
                                 </li>
                             </ul>
                         </div>
@@ -127,7 +130,10 @@
                                     <a href="/coordinatorslist" class="nav-link"> Event Coordinator list </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/chatify" class="nav-link"> Chat </a>
+                                    <a href="/chatify" class="nav-link"> Chat Room </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/videocall" class="nav-link"> Virtual Meeting Room</a>
                                 </li>
                             </ul>
                         </div>

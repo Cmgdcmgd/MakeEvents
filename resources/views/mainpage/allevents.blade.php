@@ -5,7 +5,7 @@
 			<div class="gdlr-page-title-wrapper"  >
 				<div class="gdlr-page-title-overlay"></div>
 				<div class="gdlr-page-title-container container" >
-					<h3 class="gdlr-page-title">All Venues</h3>
+					<h3 class="gdlr-page-title">Vendors</h3>
 				</div>	
 			</div>	
 			<br>
