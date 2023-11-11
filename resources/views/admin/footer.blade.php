@@ -35,7 +35,7 @@
 <!-- Dashboard init -->
 <script src="{{asset('admin/js/pages/dashboard-ecommerce.init.js')}}"></script>
 <!-- App js -->
-{{-- <script src="{{asset('admin/js/app.js')}}"></script> --}}
+<script src="{{asset('admin/js/app.js')}}"></script>
 <!-- Toastr -->
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script> --}}
 

@@ -34,12 +34,17 @@ function loadCall() {
 
 var randomString = Array.apply(null, Array(stringLength)).map(pickRandom).join('');
 
-    var domain = "meet.jit.si";
+    var domain = "meet.engagemedia.org";
     var options = {
         "roomName": randomString,
         "parentNode": container,
         "width": screen.width/2,
         "height": screen.height/1.5,
+        configOverWrite: {
+            prejoinConfig:{
+                enabled: false
+            }
+        }
     };
     api = new JitsiMeetExternalAPI(domain, options);
 
