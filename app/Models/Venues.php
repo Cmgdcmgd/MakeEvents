@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\VenuesEvents;
+use App\Models\VenuesServices;
 
 class Venues extends Model
 {
@@ -28,9 +30,19 @@ class Venues extends Model
         'date_created'
     ];
 
+    public function venueEvents()
+    {
+        return $this->hasMany(VenuesEvents::class, 'venue_id', 'venue_id');
+    }
+
+    public function venueServices()
+    {
+        return $this->hasMany(VenuesServices::class, 'venue_id', 'venue_id');
+    }
+
     public static function addVenue($data,$mainPhotoName,$additionalPhotos){
-        DB::table('venues')
-            ->insert([
+        $id = DB::table('venues')
+            ->insertGetId([
                 'user_id' => session('userid'),
                 'venue_name' => $data['venue_name'],
                 'price' => $data['price'],
@@ -40,8 +52,12 @@ class Venues extends Model
                 'main_photo' => $mainPhotoName,
                 'additional_photos' => $additionalPhotos,
                 'bank' => $data['bank'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'sales_representative' => $data['sales_representative'],
+                'booking_allowed' => $data['booking_allowed'],
+                'max_capacity' => $data['max_capacity'],
         ]);
+        return $id;
     }
 
     public static function editVenue($data){
@@ -85,7 +101,11 @@ class Venues extends Model
                 'location' => $data['location'],
                 'contact_number' => $data['contact_number'],
                 'bank' => $data['bank'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'sales_representative' => $data['sales_representative'],
+                'booking_allowed' => $data['booking_allowed'],
+                'max_capacity' => $data['max_capacity'],
+
         ]);
     }
 

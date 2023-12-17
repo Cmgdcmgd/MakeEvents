@@ -99,9 +99,9 @@
                                     
                                 </div><!-- end col -->
                                 @endif
-                                @if(session('user_type') == "Vendor")
+                                <!-- @if(session('user_type') == "Vendor")
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
+                                   
                                     <a href="/pendingpayments">
                                         <div class="card card-animate">
                                             <div class="card-body">
@@ -119,15 +119,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- end card body -->
-                                        </div><!-- end card -->
+                                            </div>
+                                        </div>
                                     </a>
                                     
-                                </div><!-- end col -->
-                                @endif
-                                @if(session('user_type') == "Event Coordinator")
+                                </div>
+                                @endif -->
+                                <!-- @if(session('user_type') == "Event Coordinator")
                                 <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
+                                   
                                     <a href="/pendingpaymentscoordinator">
                                         <div class="card card-animate">
                                             <div class="card-body">
@@ -145,12 +145,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- end card body -->
-                                        </div><!-- end card -->
+                                            </div>
+                                        </div>
                                     </a>
                                     
-                                </div><!-- end col -->
-                                @endif
+                                </div>
+                                @endif -->
                                 @if(session('user_type') == "Vendor")
                                 <div class="col-xl-3 col-md-6">
                                     <!-- card -->

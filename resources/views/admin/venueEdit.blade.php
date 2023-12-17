@@ -67,6 +67,42 @@
                                                 <input class="form-control" name="bank" type="text" id="bank" value="{{$venue->bank}}">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Bookings allowed per day</label>
+                                                <input class="form-control" name="booking_allowed" type="number" id="booking_allowed" value="{{$venue->booking_allowed}}">
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Sales Representative</label>
+                                                <input class="form-control" name="sales_representative" type="text" id="sales_representative" value="{{$venue->sales_representative}}">
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Max Capacity</label>
+                                                <input class="form-control" name="max_capacity" type="number" id="max_capacity" value="{{$venue->max_capacity}}">
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Events Offered</label>
+                                                <select class="required form-control multiple_selects" name="events_offered[]" multiple="multiple">
+                                                    @foreach($events as $option)
+                                                        <option @if(in_array($option->event_name , $venueEvents)) selected @endif value="{{$option->event_name}}">{{$option->event_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Services Offered</label>
+                                                <select class="required form-control multiple_selects" name="services_offered[]" multiple="multiple">
+                                                    @foreach($services as $option)
+                                                        <option @if(in_array($option->service_name , $venueServices)) selected @endif value="{{$option->service_name}}">{{$option->service_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Amenities Offered</label>
+                                                <select class="required form-control multiple_selects" name="amenities_offered[]" multiple="multiple">
+                                                    @foreach($amenities as $option)
+                                                        <option @if(in_array($option->amenity_name , $venueAmenities)) selected @endif value="{{$option->amenity_name}}">{{$option->amenity_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
                                                 <label for="description" class="form-label">Description</label>
                                                 <textarea class="form-control" name="description" id="description">{{$venue->description}}</textarea>
                                             </div>

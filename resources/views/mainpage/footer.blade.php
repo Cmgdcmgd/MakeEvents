@@ -84,7 +84,7 @@
 {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -99,6 +99,28 @@
                 "progressBar" : true
             }
         toastr.success("{{ session()->get('message') }}");
+    @endif
+
+    @if(session()->has('form_errors'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Error' ,
+            text: "{{ session()->get('form_errors') }}",
+            showCancelButton: false,
+            showConfirmButton: true,
+            allowOutsideClick: false,
+        });
+    @endif
+
+    @if(session()->has('form_success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Booked!' ,
+            text: "{{ session()->get('form_success') }}",
+            showCancelButton: false,
+            showConfirmButton: true,
+            allowOutsideClick: false,
+        });
     @endif
 
     $('#try').click(function(e){
@@ -124,8 +146,66 @@
         })
     });
 
+    $('#reserve_venue').click(function(e){
+        var time_start = document.getElementById('time_start').value;
+        var time_end = document.getElementById('time_end').value;
+        var event_name = document.getElementById('event_name').value;
+        var client_name = document.getElementById('client_name').value;
+        var number_of_guests = document.getElementById('number_of_guests').value;
+
+        if (
+        time_start == null ||
+        time_end == '' ||
+        event_name == '' ||
+        client_name == '' ||
+        number_of_guests == ''
+    ) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Kindly fill out missing fields. Thank you.',
+            showCancelButton: false,
+            showConfirmButton: true,
+            allowOutsideClick: false,
+        });
+    } else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Reserve this event venue now?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, book it!'
+        }).then((willBook) => {
+            
+                    var form = $(this).closest("form");
+                    form.submit();
+            
+        })
+    }
+       
+    });
+
+    const
+    range = document.getElementById('maxcapacity'),
+    rangeV = document.getElementById('rangeV'),
+    setValue = ()=>{
+        const
+        newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
+        newPosition = 10 - (newValue * 0.2);
+        rangeV.innerHTML = `<span>${range.value}</span>`;
+        rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    };
+    document.addEventListener("DOMContentLoaded", setValue);
+    range.addEventListener('input', setValue);
+
     
-        
+    $(".multiple_selects").select2({
+        tags: true,
+        allowClear: true,
+        tokenSeparators: [','],
+        minimumResultsForSearch: -1,
+    });
 </script>
 
 </body>

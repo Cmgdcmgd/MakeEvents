@@ -230,4 +230,11 @@ Swal.fire({
 }); 
 })
 
+
+$(".multiple_selects").select2({
+    tags: true,
+    allowClear: true,
+    tokenSeparators: [','],
+    minimumResultsForSearch: -1,
+});
 </script>

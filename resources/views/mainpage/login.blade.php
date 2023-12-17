@@ -41,11 +41,11 @@
                                             </div>
                                         @endif
                                         <p>
-                                            <input class="wpcf7-form-control wpcf7-submit" type="submit" value="Submit"><div style="float: right"></div><a href="/register" class="wpcf7-form-control wpcf7-submit" value="Register">Don't have an account yet? Register here</a>
+                                            <input class="wpcf7-form-control wpcf7-submit" type="submit" value="Submit"><div style="float: right"></div><a href="/register" class="wpcf7-form-control wpcf7-submit" value="Register">Don't have an account yet? Sign-Up here</a>
                                         </p>
-                                        <p>
+                                        <!-- <p>
                                             <a href="/administrator" class="wpcf7-form-control wpcf7-submit" value="Register">Vendor and Event Coordinator Login</a>
-                                        </p>
+                                        </p> -->
                                     </form>
                                 </div>
                             </p>

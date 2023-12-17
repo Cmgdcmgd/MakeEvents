@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 use Session;
 use Mail;
 use App\Mail\MailNotify;
@@ -16,6 +17,10 @@ use App\Models\Venues;
 use App\Models\Coordinators;
 use App\Models\Eventbooking;
 use App\Models\Coordinatorbooking;
+use App\Models\VenuesAmeneties;
+use App\Models\VenuesEvents;
+use App\Models\VenuesServices;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
@@ -168,9 +173,28 @@ class Controller extends BaseController
 
         $additionalPhotos = implode(",",$additionalPics);
 
-        Venues::addVenue($data,$mainPhotoName,$additionalPhotos);
-      
-        return redirect('/newvenue')->with('message', 'Venue successfully added!');
+        $id = Venues::addVenue($data,$mainPhotoName,$additionalPhotos);
+        
+        foreach ($data['events_offered'] as $key => $event) {
+            $venueEvent = new VenuesEvents;
+            $venueEvent->venue_id = $id;
+            $venueEvent->event_name = ucfirst($event);
+            $venueEvent->save();
+        }
+        foreach ($data['services_offered'] as $key => $service) {
+            $venueService = new VenuesServices;
+            $venueService->venue_id = $id;
+            $venueService->service_name = ucfirst($service);
+            $venueService->save();
+        }
+        foreach ($data['amenities_offered'] as $key => $amenity) {
+            $venueAmenity = new VenuesAmeneties;
+            $venueAmenity->venue_id = $id;
+            $venueAmenity->amenity_name = ucfirst($amenity);
+            $venueAmenity->save();
+        }
+
+        return redirect('/venueslist')->with('message', 'Venue successfully added!');
     }
 
     public function index(){
@@ -183,6 +207,15 @@ class Controller extends BaseController
                         ->get();
 
         return view('mainpage.index',compact('venues','coordinators'));
+    }
+
+    public function newvenue()
+    {
+        $events = VenuesEvents::all()->unique('event_name');
+        $services = VenuesServices::all()->unique('service_name');
+        $amenities = VenuesAmeneties::all()->unique('amenity_name');
+
+        return view('admin.newvenue', compact('events', 'services', 'amenities'));
     }
 
     public function venuedetails($id){
@@ -218,12 +251,18 @@ class Controller extends BaseController
     public function venueedit($id){
         
         $venue = Venues::where('venue_id',$id)->first();
-        
-        return view('admin.venueEdit',compact('venue'));
+        $venueEvents = VenuesEvents::where('venue_id', $id)->pluck('event_name')->toArray();
+        $venueServices = VenuesServices::where('venue_id', $id)->pluck('service_name')->toArray();
+        $venueAmenities = VenuesAmeneties::where('venue_id', $id)->pluck('amenity_name')->toArray();
+
+        $events = VenuesEvents::all()->unique('event_name');
+        $services = VenuesServices::all()->unique('service_name');
+        $amenities = VenuesAmeneties::all()->unique('amenity_name');
+
+        return view('admin.venueEdit',compact('venueAmenities','venueServices', 'venueEvents', 'venue', 'events', 'services', 'amenities'));
     }
 
     public function editvenue(Request $data){
-
         if(!empty($data['main_photo'])){
 
             $mainphoto = Venues::where('venue_id',$data['venue_id'])->first();
@@ -250,6 +289,39 @@ class Controller extends BaseController
                 $file->move(public_path('/mainpage/additional photos'), $file->getClientOriginalName());
             }
 
+        }
+        //check for existing events saved for this venue
+        $events = VenuesEvents::where('venue_id', $data['venue_id'])->count();
+        $services = VenuesServices::where('venue_id', $data['venue_id'])->count();
+        $amenities = VenuesAmeneties::where('venue_id', $data['venue_id'])->count();
+
+        if($events > 0) {
+            VenuesEvents::where('venue_id', $data['venue_id'])->delete();
+        }
+        if($services > 0) {
+            VenuesServices::where('venue_id', $data['venue_id'])->delete();
+        }
+        if($amenities > 0) {
+            VenuesAmeneties::where('venue_id', $data['venue_id'])->delete();
+        }
+
+        foreach ($data['events_offered'] as $key => $event) {
+            $venueEvent = new VenuesEvents;
+            $venueEvent->venue_id = $data['venue_id'];
+            $venueEvent->event_name = ucfirst($event);
+            $venueEvent->save();
+        }
+        foreach ($data['services_offered'] as $key => $service) {
+            $venueService = new VenuesServices;
+            $venueService->venue_id = $data['venue_id'];
+            $venueService->service_name = ucfirst($service);
+            $venueService->save();
+        }
+        foreach ($data['amenities_offered'] as $key => $amenity) {
+            $venueAmenity = new VenuesAmeneties;
+            $venueAmenity->venue_id = $data['venue_id'];
+            $venueAmenity->amenity_name = ucfirst($amenity);
+            $venueAmenity->save();
         }
 
         Venues::editVenue($data);
@@ -353,7 +425,12 @@ class Controller extends BaseController
 
         $data = Venues::all();
 
-        return view('mainpage.allevents',compact('data'));
+        $events = VenuesEvents::all()->unique('event_name');
+        $services = VenuesServices::all()->unique('service_name');
+        $locations = Venues::all()->pluck('location')->toArray();
+        $maxCapacity = Venues::max('max_capacity');
+        
+        return view('mainpage.allevents',compact('data', 'events', 'services', 'locations', 'maxCapacity'));
     }
 
     public function allcoordinators(){
@@ -372,7 +449,28 @@ class Controller extends BaseController
         $users = User::where('id',$request['user_id'])->first();
 
         $venues = Venues::where('venue_id',$request['venue_id'])->first();
+        //check if venue is max booking that day
+        $bookings = Eventbooking::where('venue_id', $request['venue_id'])->whereDate('reserved_date', $request['reserved_date'])->count();
+        
+        if($bookings == $venues->booking_allowed) {
+            return redirect('venuedetails/'.$venues->venue_id)->with('form_errors', 'Venue is already at max capacity to accept another event');
+        }
 
+        //check for conflicting time
+        $times = Eventbooking::where('venue_id', $request['venue_id'])
+                    ->whereDate('reserved_date', $request['reserved_date'])
+                    ->where(fn($query) => 
+                        $query->whereTime('time_start', '>=', $request['time_start'])
+                        ->whereTime('time_start', '<=', $request['time_end'])
+                    )
+                    ->orWhere(fn($query) =>                         
+                        $query->whereTime('time_end', '>=', $request['time_start'])
+                        ->whereTime('time_end', '<=', $request['time_end'])
+                    )
+                    ->count();
+        if($times > 0 ) {
+            return redirect('venuedetails/'.$venues->venue_id)->with('form_errors', 'Venue is already booked at this time slot');
+        }
         $body1 = "Hi, ".$users->first_name."!";
         $body2 = "Thank you for booking with us! To fully reserve your venue, please pay the ₱".$venues->price." fee to the bank details below: ";
         $bankdetails = $venues->bank;
@@ -390,7 +488,7 @@ class Controller extends BaseController
         
         Eventbooking::newBooking($request);
 
-        return redirect('/')->with('message', 'Successfully Booked!');
+        return redirect('venuedetails/'.$venues->venue_id)->with('form_success', 'Venue has been booked. Please check your email for payment instructions.');
     }
 
     public function logincustomer(Request $data){
@@ -405,7 +503,12 @@ class Controller extends BaseController
             $data->session()->put('user_id', $request->id);
             $data->session()->put('profpic', $request->profile_picture);
 
-            return redirect('/')->with('message', 'Welcome!');
+            if($request->user_type == 'Event Coordinator' || $request->user_type == 'Vendor') {
+                return redirect('/dashboard');
+            } else {
+                return redirect('/')->with('message', 'Welcome!');
+            }
+            
         }
         
         return back()->withErrors([
@@ -431,7 +534,8 @@ class Controller extends BaseController
             'contact_number'=> 'required',
             'email_address' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required|min:8'
+            'password_confirmation' => 'required|min:8',
+            'agree' => 'required'
         ],
         [
             'first_name.required' => 'First Name is required',
@@ -441,7 +545,8 @@ class Controller extends BaseController
             'email_address.email' => 'Please input a valid email address',
             'email_address.unique' => 'User already existing. Please input a different email address.',
             'password.required' => 'Password is required',
-            'password_confirmation.required' => 'Confirm password is required'
+            'password_confirmation.required' => 'Confirm password is required',
+            'agree.required' => 'Please agree to the privacy policy'
         ]);
 
         User::addCustomer($data);
@@ -606,7 +711,7 @@ class Controller extends BaseController
 
     public function eventcancel(Request $data){
 
-        Eventboking::eventCancel($data);
+        Eventbooking::eventCancel($data);
     }
 
     public function coordinatoreventcancel(Request $data){
@@ -671,41 +776,73 @@ class Controller extends BaseController
     }
 
     public function filtervenues(Request $request){
-
-        if(!empty($request['maxprice'])){
-            if(!empty($request['location'])){
-                $data = DB::table('venues')
-                        ->select('*')
-                        ->where('price', '<=', $request['maxprice'])
-                        ->where('location', 'LIKE', '%'.$request['location'].'%')
-                        ->get();
-            }
-            else{
-
-                $data = DB::table('venues')
-                        ->where('price', '<=', $request['maxprice'])
-                        ->select('*')
-                        ->get();
-
-            }
-        }
-        else{
-            if(!empty($request['location'])){
-                $data = DB::table('venues')
-                        ->select('*')
-                        ->where('location', 'LIKE', '%'.$request['location'].'%')
-                        ->get();
-            }
-            else{
-                $data = DB::table('venues')
-                        ->select('*')
-                        ->get();
-            }
-        }
-
         
+        //dd($request->all());
+        $venues = Venues::with(['venueEvents', 'venueServices'])->where('venue_id', '!=', 0);
+        if(!empty($request['event_offered'])) {
+            $venues->whereHas('venueEvents', function (Builder $query) use (
+                $request
+            ) {
+                $query->where('event_name', $request['event_offered']);
+            });
+        }
+        
+        if(!empty($request['service_offered'])) {
+            $venues->whereHas('venueServices', function (Builder $query) use (
+                $request
+            ) {
+                // // dd($request['event_offered']);
+                // $query->select('id');
+                $query->where('service_name', $request['service_offered']);
+            });
+        }
 
-        return view('mainpage.allevents',compact('data'));
+        if(!empty($request['maxcapacity'])) {
+            $venues->where('max_capacity', '>=', $request['maxcapacity']);
+        }
+
+        if(!empty($request['location_offered'])) {
+            $venues->where('location', '>=', $request['location_offered']);
+        }
+
+        $data = $venues->get();
+        // if(!empty($request['maxprice'])){
+        //     if(!empty($request['location'])){
+        //         $data = DB::table('venues')
+        //                 ->select('*')
+        //                 ->where('price', '<=', $request['maxprice'])
+        //                 ->where('location', 'LIKE', '%'.$request['location'].'%')
+        //                 ->get();
+        //     }
+        //     else{
+
+        //         $data = DB::table('venues')
+        //                 ->where('price', '<=', $request['maxprice'])
+        //                 ->select('*')
+        //                 ->get();
+
+        //     }
+        // }
+        // else{
+        //     if(!empty($request['location'])){
+        //         $data = DB::table('venues')
+        //                 ->select('*')
+        //                 ->where('location', 'LIKE', '%'.$request['location'].'%')
+        //                 ->get();
+        //     }
+        //     else{
+        //         $data = DB::table('venues')
+        //                 ->select('*')
+        //                 ->get();
+        //     }
+        // }
+
+        $events = VenuesEvents::all()->unique('event_name');
+        $services = VenuesServices::all()->unique('service_name');
+        $locations = Venues::all()->pluck('location')->toArray();
+        $maxCapacity = Venues::max('max_capacity');
+    
+        return view('mainpage.allevents',compact('data', 'events', 'services', 'locations', 'maxCapacity'));
     }
 
     public function myprofile(){

@@ -30,7 +30,7 @@
 												</h3>
 												<div class="gdlr-hotel-room-info">
 													<div class="gdlr-room-price">
-														<span class="gdlr-tail">₱{{$coordinator->price}}</span>
+														
 													</div><div class="clear"></div>
 												</div>
 												<a class="gdlr-button with-border" href="/coordinatordetails/{{$coordinator->coordinator_id}}">Check Details

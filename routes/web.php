@@ -31,9 +31,7 @@ Route::get('/administrator', function () {
 Route::get('/newuser', function () {
     return view('admin.newUser');
 });
-Route::get('/newvenue', function () {
-    return view('admin.newVenue');
-});
+
 Route::get('/register', function () {
     return view('mainpage.register');
 });
@@ -86,9 +84,18 @@ Route::get('/aboutus', [Controller::class, 'aboutus']);
 Route::get('/coordinatordetails/{id}', [Controller::class, 'coordinatordetails']);
 Route::patch('/updateevent/{id}', [Controller::class, 'updateevent']);
 Route::patch('/updatecoordinatorevent/{id}', [Controller::class, 'updatecoordinatorevent']);
-Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);
-Route::get('/pendingpaymentscoordinator', [Controller::class, 'pendingpaymentscoordinator']);
+// Route::get('/pendingpayments', [Controller::class, 'pendingpayments']);
+// Route::get('/pendingpaymentscoordinator', [Controller::class, 'pendingpaymentscoordinator']);
 
+Route::get('/privacypolicy', function () {
+    return view('mainpage.privacy');
+});
+
+// Route::get('/newvenue', function () {
+//     return view('admin.newVenue');
+// });
+
+Route::get('/newvenue', [Controller::class, 'newvenue']);
 
 Route::get('/customerlogout', [Controller::class, 'customerlogout']);
 Route::post('/editcustomer', [Controller::class, 'editcustomer']);

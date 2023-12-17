@@ -28,6 +28,7 @@ class Coordinatorbooking extends Model
                 'coordinator_id' => $data['coordinator_id'],
                 'booked_by' => $data['user_id'],
                 'reserved_date' => $data['reserved_date'],
+                'reservation_status' => 'Reserved',
         ]);
 
     }

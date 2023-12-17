@@ -37,10 +37,23 @@
                                                         <input type="text" id="reservedatepicker" class="gdlr-datepicker" name="reserved_date"/>
                                                     </div>
                                                 </div>
+                                                <div class="event_booking_form">
+                                                <p>Time (required)</p>
+                                                    <input type="time" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="time_start" name="time_start">
+                                                        -
+                                                    <input type="time" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="time_end" name="time_end">
+                                                    <p>Client Name (required)</p>
+                                                    <input type="text" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="client_name" name="client_name">
+                                                    <p>Event Name (required)</p>
+                                                    <input type="text" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="event_name" name="event_name">
+                                                   
+                                                    <p>Number of guests (required)</p>
+                                                    <input type="number" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="number_of_guests" name="number_of_guests">
+                                                </div>
                                                 <input type="hidden" name="user_id" value="{{session('user_id')}}">
                                                 <input type="hidden" name="venue_id" value="{{$data->venue_id}}">
                                                 @if(session('logged') == true)
-                                                    <a href="#" class="gdlr-reservation-bar-button gdlr-button with-border" id="try">Reserve Now</a>
+                                                    <a href="#" class="gdlr-reservation-bar-button gdlr-button with-border" id="reserve_venue">Reserve Now</a>
                                                 @else
                                                   <a href="/customerlogin" class="gdlr-reservation-bar-button gdlr-button with-border">Login to reserve</a>  
                                                 @endif

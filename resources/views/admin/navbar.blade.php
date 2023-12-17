@@ -103,9 +103,9 @@
                                 <li class="nav-item">
                                     <a href="/venueslist" class="nav-link"> Vendor listing </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="/pendingpayments" class="nav-link"> Pending Payments </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="/eventscalendar" class="nav-link"> Clients Events Calendar </a>
                                 </li>
@@ -126,9 +126,9 @@
                         </a>
                         <div class="collapse menu-dropdown" id="eventcoordinator">
                             <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="/pendingpaymentscoordinator" class="nav-link"> Pending Payments </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="/coordinatorcalendar" class="nav-link"> Clients Events Calendar </a>
                                 </li>

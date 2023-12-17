@@ -11,7 +11,7 @@
                             <p>
                                 <div class="clear"></div>
                                 <div class="gdlr-space" style="margin-top: -22px;"></div>
-                                <h5 class="gdlr-heading-shortcode "  style="font-weight: bold;" >Register </h5>
+                                <h5 class="gdlr-heading-shortcode "  style="font-weight: bold;" >Sign-Up </h5>
                                 <div class="clear"></div>
                                 <div class="gdlr-space" style="margin-top: 25px;"></div>
 
@@ -69,6 +69,7 @@
                                                 
                                             </span>
                                         </p>
+                                        <p><input type="checkbox" id="agree" name="agree" value="agree"> I agree to the <a href="/privacypolicy" target="_blank" class="wpcf7-form-control wpcf7-submit">Privacy Policy</a></p>
                                         @if ($errors->any())
                                             <div class="alert alert-danger">
                                                 <ul>

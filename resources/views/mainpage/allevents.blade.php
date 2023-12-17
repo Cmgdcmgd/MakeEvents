@@ -11,15 +11,44 @@
 			<br>
 			<div class="container">
 				<div class="gdlr-hotel-availability-wrapper" style="margin-bottom: 20px;">
-					<form class="gdlr-hotel-availability gdlr-item" id="gdlr-hotel-availability" method="post" action="/filtervenues">
+					<form  id="filter_search" class="gdlr-hotel-availability gdlr-item" id="gdlr-hotel-availability" method="post" action="/filtervenues">
 						@csrf
-						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Max Price</span>
+						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Events Catered</span>
 							<div class="gdlr-wrapper">
-								<input type="text" id="max price" name="maxprice" class="form-control"></div>
+								<select class="required form-control" name="event_offered">
+									<option value="">Please select..</option>
+                            	@foreach($events as $option)
+                            		<option value="{{$option->event_name}}">{{$option->event_name}}</option>
+                           		@endforeach
+                        		</select>
+							</div>
+						</div>
+						
+						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Services Catered</span>
+							<div class="gdlr-wrapper">
+								<select class="required form-control" name="service_offered">
+									<option value="">Please select..</option>
+                            	@foreach($services as $option)
+                            		<option value="{{$option->service_name}}">{{$option->service_name}}</option>
+                           		@endforeach
+                        		</select>
+							</div>
+						</div>
+
+						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Max Capacity</span>
+							<div class="gdlr-wrapper range-wrap">
+								<div class="range-value" id="rangeV"></div>
+								<input type="range" min="1" max="{{$maxCapacity}}" id="maxcapacity" name="maxcapacity" value="1" class="form-control">
+							</div>
 						</div>
 						<div class="gdlr-reservation-field gdlr-resv-datepicker"><span class="gdlr-reservation-field-title">Location</span>
 							<div class="gdlr-wrapper">
-								<input type="text" id="location" name="location" class="form-control">
+								<select class="required form-control" name="location_offered">
+									<option value="">Please select..</option>
+                            	@foreach($locations as $option)
+                            		<option value="{{$option}}">{{$option}}</option>
+                           		@endforeach
+                        		</select>
 							</div>
 						</div>
 							<div class="gdlr-wrapper">
@@ -56,7 +85,7 @@
 												</h3>
 												<div class="gdlr-hotel-room-info">
 													<div class="gdlr-room-price">
-														<span class="gdlr-tail">₱{{$item->price}}</span>
+														<span class="gdlr-tail">{{$item->location}}</span>
 													</div><div class="clear"></div>
 												</div>
 												<a class="gdlr-button with-border" href="/venuedetails/{{$item->venue_id}}">Check Details

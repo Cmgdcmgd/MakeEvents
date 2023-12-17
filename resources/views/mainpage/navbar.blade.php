@@ -29,6 +29,7 @@
                                     <li class="menu-item"><a href="/customerlogout">Logout</a></li>
                                 @else
                                     <li class="menu-item"><a href="/customerlogin">Login</a></li>
+                                    <li class="menu-item"><a href="/register">Sign-Up</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -56,6 +57,7 @@
                                 <li class="menu-item"><a href="/customerlogout">Logout</a></li>
                             @else
                                 <li class="menu-item"><a href="/customerlogin">Login</a></li>
+                                <li class="menu-item"><a href="/register">Sign-Up</a></li>
                             @endif
                         </ul>
                     </nav>

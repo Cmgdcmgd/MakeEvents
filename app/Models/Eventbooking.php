@@ -28,6 +28,12 @@ class Eventbooking extends Model
                 'user_id' => $data['user_id'],
                 'venue_id' => $data['venue_id'],
                 'reserved_date' => $data['reserved_date'],
+                'client_name' => $data['client_name'],
+                'event_name' => $data['event_name'],
+                'time_end' => $data['time_end'],
+                'time_start' => $data['time_start'],
+                'number_of_guests' => $data['number_of_guests'],
+                'reservation_status' => 'Reserved',
         ]);
 
     }
