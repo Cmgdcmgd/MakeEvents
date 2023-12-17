@@ -206,7 +206,50 @@
         tokenSeparators: [','],
         minimumResultsForSearch: -1,
     });
+    
 </script>
-
+@isset($expiry)
+    <script nonce="{{ session('src-nonce') }}">
+        var countDownDate = new Date(`<?php echo $expiry?>`).getTime();
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            seconds < 10 ? '0' + seconds.toString() : seconds
+            document.getElementById("countdown").innerHTML = "( " + seconds + " )";
+            if (distance < 0) {
+                clearInterval(x);
+                let countdown = document.getElementById("countdown").style.display = 'none';
+                resendButton = document.getElementById('resendButton')
+                resendButton.classList.remove('btn-link')
+                resendButton.classList.add('btn-primary')
+                resendButton.disabled = false
+                let resendLink = document.getElementById('resendLink').setAttribute('href', '/one-time-password/resend');
+            }
+        }, 1000);
+    </script>
+    <style>
+        a {
+            text-decoration: none
+        }
+        .otp-submit-btn {
+            width: 100%;
+        }
+        .otp-resend-btn {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .btn-link {
+            color: black;
+            text-decoration: none;
+        }
+        .otp-back-btn {
+            width: 100%;
+            display: block;
+            text-align: center
+        }
+    </style>
+@endisset
 </body>
 </html>

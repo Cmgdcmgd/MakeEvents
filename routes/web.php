@@ -96,7 +96,8 @@ Route::get('/privacypolicy', function () {
 // });
 
 Route::get('/newvenue', [Controller::class, 'newvenue']);
-
+Route::get('/onetimepassword', [Controller::class, 'onetimepassword'])->name('One-Time-Password');
+Route::post('/userverify', [Controller::class, 'userverify']);
 Route::get('/customerlogout', [Controller::class, 'customerlogout']);
 Route::post('/editcustomer', [Controller::class, 'editcustomer']);
 

@@ -40,7 +40,7 @@
                     <hr>
                     <div class="content-body">
                         <h4>Hello, {{$email}}!</h4>
-                        <p class="text">Enter the following OTP to finish logging in</p>
+                        <p class="text">Enter the following OTP to finish signing up</p>
                         <h3 class="otp">{{str_pad($token, 5, '0', STR_PAD_LEFT)}}</h3>
                     </div>
                 </div>

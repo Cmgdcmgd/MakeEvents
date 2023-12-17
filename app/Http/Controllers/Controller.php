@@ -23,6 +23,8 @@ use App\Models\VenuesServices;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use App\Services\OTP\Types\EmailOTP;
+use App\Services\OTP\OTPService;
 
 
 class Controller extends BaseController
@@ -548,11 +550,40 @@ class Controller extends BaseController
             'password_confirmation.required' => 'Confirm password is required',
             'agree.required' => 'Please agree to the privacy policy'
         ]);
-
-        User::addCustomer($data);
-
         
-        return redirect('/customerlogin')->with('message', 'Successfully Registered');
+        User::addCustomer($data);
+       
+        $emailOTPMethod = new EmailOTP($data['email_address']);
+        $service = new OTPService($emailOTPMethod);
+        $service->send();
+        //dd($data['email_address']);
+        return view('mainpage/otpverify', [
+            'email' => $data['email_address'],
+            'expiry' => $service->getExpiry()
+        ]);
+        // return redirect('/customerlogin')->with('message', 'Successfully Registered');
+    }
+
+    public function onetimepassword()
+    {
+        return view('mainpage/otpverify');
+    }
+
+    public function userverify(Request $data)
+    {
+        $email = $data['email'];
+        $emailOTPMethod = new EmailOTP($email);
+        $service = new OTPService($emailOTPMethod);
+        $status = $service->verify($data['code'], $email);
+        if ($status) {
+            return redirect('/customerlogin')->with('message', 'Successfully Registered');
+        }
+        return redirect()->route('One-Time-Password')
+            ->with([
+                'email' => $email,
+                'expiry' => $service->getExpiry()
+            ])
+            ->withErrors(['code' => $service->getMessage()]);
     }
 
     public function adminlogin(Request $data){

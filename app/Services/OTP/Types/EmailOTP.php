@@ -14,7 +14,7 @@ class EmailOTP implements OTPInterface
     private bool $noError;
     private string $errorMessage;
 
-    public function __construct(string $receiver, int $token = 11111) {
+    public function __construct(string $receiver, int $token = 111111) {
         $this->receiver = $receiver;
         $this->token = $token;
     }

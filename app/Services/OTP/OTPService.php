@@ -14,7 +14,7 @@ class OTPService
 
     public function send() : bool {
         $status = $this->otpMethod->generate()->send()->getStatus();
-        $this->verifiedUser($status);
+        //$this->verifiedUser($status);
         return $status;
     }
 
@@ -30,18 +30,18 @@ class OTPService
         return $this->otpMethod->getMessage();
     }
 
-    public function verify(int $code) : bool {
+    public function verify(int $code, string $email) : bool {
         $status = $this->otpMethod->verify($code)->getStatus();
         if ((!$status && $this->otpMethod->isExpired()) || (!$status && $this->otpMethod->isLimitReached())) {
             $this->otpMethod->generate()->send()->getStatus();
         }
-        $this->verifiedUser($status);
+        $this->verifiedUser($status, $email);
         return $status;
     }
 
-    public function verifiedUser(bool $status) {
-        $user = User::where('email', Auth::user()->email)->first();
-        $user->otp_verified = $status;
+    public function verifiedUser(bool $status, string $email) {
+        $user = User::where('email', $email)->first();
+        $user->active_status = 1;
         $user->save();
     }
 }
