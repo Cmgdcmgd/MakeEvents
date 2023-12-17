@@ -494,12 +494,20 @@ class Controller extends BaseController
     }
 
     public function logincustomer(Request $data){
-
+        
+        
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            
+            $request = User::where('email',$data['email'])->first();
+
+            if($request->active_status != 1) {
+                return back()->withErrors([
+                    'email' => 'Account is not verified',
+                ])->onlyInput('email');
+            }
+
             $data->session()->regenerate();
 
-            $request = User::where('email',$data['email'])->first();
+           
             $data->session()->put('logged', true);
             $data->session()->put('user_type', $request->user_type);
             $data->session()->put('user_id', $request->id);
