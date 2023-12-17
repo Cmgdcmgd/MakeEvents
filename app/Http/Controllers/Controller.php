@@ -166,6 +166,10 @@ class Controller extends BaseController
         $mainPhoto->move(public_path('/mainpage/main photos'), $mainPhoto->getClientOriginalName());
         $mainPhotoName = $mainPhoto->getClientOriginalName();
 
+        $packagePhoto = $data->file('package_photo');
+        $packagePhoto->move(public_path('/mainpage/main photos'), $packagePhoto->getClientOriginalName());
+        $packagePhotoName = $packagePhoto->getClientOriginalName();
+
         $additionalPics = [];
         
         foreach($data->file('additional_photos') as $file){
@@ -175,7 +179,7 @@ class Controller extends BaseController
 
         $additionalPhotos = implode(",",$additionalPics);
 
-        $id = Venues::addVenue($data,$mainPhotoName,$additionalPhotos);
+        $id = Venues::addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotoName);
         
         foreach ($data['events_offered'] as $key => $event) {
             $venueEvent = new VenuesEvents;
@@ -221,17 +225,10 @@ class Controller extends BaseController
     }
 
     public function venuedetails($id){
-
-        $data = DB::table('venues')
-                ->join('users','users.id','=','venues.user_id')
-                ->select('users.*','venues.*')
-                ->where('venues.venue_id',$id)
-                ->first();
-
         
-        
-        // $data = Venues::where('venue_id',$id)->first();
+        $data = Venues::with(['venueAmenities', 'venueEvents', 'venueServices', 'venueUser'])->where('venue_id', $id)->first();
 
+        //dd($data);
         return view('mainpage.venuedetails',compact('data'));
     }
 
@@ -265,6 +262,17 @@ class Controller extends BaseController
     }
 
     public function editvenue(Request $data){
+        if(!empty($data['package_photo'])){
+
+            $packagePhoto = Venues::where('venue_id',$data['venue_id'])->first();
+
+            File::delete("mainpage/main photos/".$packagePhoto->package_photo);
+
+            $packagePhoto = $data->file('package_photo');
+            $packagePhoto->move(public_path('/mainpage/main photos'), $packagePhoto->getClientOriginalName());
+
+        }
+
         if(!empty($data['main_photo'])){
 
             $mainphoto = Venues::where('venue_id',$data['venue_id'])->first();
@@ -564,6 +572,9 @@ class Controller extends BaseController
         $emailOTPMethod = new EmailOTP($data['email_address']);
         $service = new OTPService($emailOTPMethod);
         $service->send();
+        session()->put('email_otp', $data['email_address']);
+        //session()->forget('voucher_attempts');
+        //session()->get('mobile_number')
         //dd($data['email_address']);
         return view('mainpage/otpverify', [
             'email' => $data['email_address'],
@@ -574,7 +585,34 @@ class Controller extends BaseController
 
     public function onetimepassword()
     {
-        return view('mainpage/otpverify');
+        $email = session()->get('email_otp');
+        $emailOTPMethod = new EmailOTP($email);
+        $service = new OTPService($emailOTPMethod);
+        return view('mainpage.otpverify', [
+            'email' => $email,
+            'expiry' => $service->getExpiry()
+        ]);
+        // return view('mainpage/otpverify');
+    }
+
+    public function resend() {
+        $email = session()->get('email_otp');
+        $emailOTPMethod = new EmailOTP($email);
+        $service = new OTPService($emailOTPMethod);
+        if (!$service->isExpired()) {
+            return redirect()->route('One-Time-Password')->withError(['code' => 'OTP is not yet expired!']);
+        }
+        if ($service->send()) {
+            return redirect()->route('One-Time-Password')->withSuccess('OTP has been sent!');
+        }
+        return redirect()->route('One-Time-Password')->withError(['code' => 'Failed on resending OTP!']);
+    }
+
+    public function cancel() {
+        $email = session()->get('email_otp');
+        $user = User::where('email', $email)->delete();
+        Session::flush();
+        return redirect('/register');
     }
 
     public function userverify(Request $data)
@@ -584,6 +622,7 @@ class Controller extends BaseController
         $service = new OTPService($emailOTPMethod);
         $status = $service->verify($data['code'], $email);
         if ($status) {
+            session()->forget('email_otp');
             return redirect('/customerlogin')->with('message', 'Successfully Registered');
         }
         return redirect()->route('One-Time-Password')

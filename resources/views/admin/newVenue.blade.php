@@ -58,6 +58,10 @@
                                                 <input class="form-control" name="main_photo" type="file" accept="image/*" id="main_photo">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
+                                                <label for="main_photo" class="form-label">Package Photo</label>
+                                                <input class="form-control" name="package_photo" type="file" accept="image/*" id="package_photo">
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
                                                 <label for="additional_photos" class="form-label">Additional Photos</label>
                                                 <input class="form-control" name="additional_photos[]" type="file" multiple accept="image/*" id="additional_photos">
                                             </div>

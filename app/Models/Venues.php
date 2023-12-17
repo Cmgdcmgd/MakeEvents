@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\VenuesEvents;
 use App\Models\VenuesServices;
-
+use App\Models\VenuesAmeneties;
+use App\Models\User;
 class Venues extends Model
 {
     use HasFactory;
@@ -35,12 +36,22 @@ class Venues extends Model
         return $this->hasMany(VenuesEvents::class, 'venue_id', 'venue_id');
     }
 
+    public function venueAmenities()
+    {
+        return $this->hasMany(VenuesAmeneties::class, 'venue_id', 'venue_id');
+    }
+
     public function venueServices()
     {
         return $this->hasMany(VenuesServices::class, 'venue_id', 'venue_id');
     }
 
-    public static function addVenue($data,$mainPhotoName,$additionalPhotos){
+    public function venueUser()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public static function addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotoName){
         $id = DB::table('venues')
             ->insertGetId([
                 'user_id' => session('userid'),
@@ -50,6 +61,7 @@ class Venues extends Model
                 'location' => $data['location'],
                 'contact_number' => $data['contact_number'],
                 'main_photo' => $mainPhotoName,
+                'package_photo' => $packagePhotoName,
                 'additional_photos' => $additionalPhotos,
                 'bank' => $data['bank'],
                 'description' => $data['description'],
@@ -70,6 +82,17 @@ class Venues extends Model
                 ->where('venue_id',$data['venue_id'])
                 ->update([
                     'main_photo' => $mainPhotoName
+            ]);
+        }
+
+        if(!empty($data['package_photo'])){
+            $package_photo = $data->file('package_photo');
+            $package_photo = $package_photo->getClientOriginalName();
+
+            DB::table('venues')
+                ->where('venue_id',$data['venue_id'])
+                ->update([
+                    'package_photo' => $package_photo
             ]);
         }
 

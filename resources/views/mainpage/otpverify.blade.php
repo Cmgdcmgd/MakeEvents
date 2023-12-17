@@ -35,7 +35,7 @@
                                         <input type="hidden" name="email" value="{{$email}}">
                                         <div class="clear"></div>
                                         <div class="clear"></div>
-                                        <button class="wpcf7-form-control wpcf7-submit has-spinner" type="submit">Submit</button>
+                                        <button class="wpcf7-form-control wpcf7-submit has-spinner otp-submit-btn" type="submit">Submit</button>
                                         <a href="#" id="resendLink">
                                             <button id="resendButton" class="btn btn-link btn-rounded btn-floating btn-block mb-1 otp-resend-btn" disabled type="button">Resend <span id="countdown"></span></button>
                                         </a>

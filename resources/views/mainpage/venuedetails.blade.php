@@ -150,12 +150,69 @@
                                                 <div class="gdlr-space" style="margin-top: 40px;"></div>
                                                 <div class="clear"></div>
                                                 <div class="gdlr-space" style="margin-top: -20px;"></div>
-                                                <p><strong>Location</strong></p>
-                                                <p>Address: {{ $data->location }}<br />
-                                                    Phone: {{ $data->contact_number }}<br />
+                                                <p><strong>Contact Information</strong></p>
+                                                <img src="{{ asset('admin/images/users') }}/{{ $data->venueUser->profile_picture }}"
+                                                                            alt="" width="400"
+                                                                            height="300" />
+                                                <p>Sales Representative: {{ $data->venueUser->first_name }}  {{ $data->venueUser->last_name }}<br />
+                                                    Contact Number: {{ $data->contact_number }}<br />
                                                     Email: {{ $data->email_address }} <br/>
-                                                    Contact Person: {{$data->first_name}} {{$data->last_name}}
                                                 </p>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <p><strong>More Details</strong></p>
+                                                <p>Guest Capacity: {{ $data->max_capacity }}<br />
+                                                    Location: {{ $data->location }}<br />
+                                                </p>
+
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <p><strong>We provide products and/or services to events such as</strong></p>
+                                                <ul>
+                                                    @if(!empty($data->venueEvents))
+                                                        @foreach($data->venueEvents as $event)
+                                                        <li>{{$event->event_name}}</li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <p><strong>What products or/and services do we provide?</strong></p>
+                                                <ul>
+                                                    @if(!empty($data->venueServices))
+                                                        @foreach($data->venueServices as $service)
+                                                        <li>{{$service->service_name}}</li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <p><strong>Amenities</strong></p>
+                                                <ul>
+                                                    @if(!empty($data->venueAmenities))
+                                                        @foreach($data->venueAmenities as $amenity)
+                                                        <li>{{$amenity->amenity_name}}</li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                <div class="clear"></div>
+                                                @if(!empty($data->package_photo))
+                                                <p><strong>Packages</strong></p>
+                                                <p>Our products or/and services</p>
+                                                <img src="{{ asset('mainpage/main photos') }}/{{ $data->package_photo }}"
+                                                                            alt="" width="400"
+                                                                            height="300" />
+                                                
+                                                @endif
 
                                             </div>
                                         </div>
