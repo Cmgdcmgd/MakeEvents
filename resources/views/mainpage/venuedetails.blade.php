@@ -212,7 +212,7 @@
                                                                             alt="" width="400"
                                                                             height="300" />
                                                 @endif
-                                                @if(!empty($data->venueFacilities))
+                                                @if(count($data->venueFacilities) != 0)
                                                 <p style="padding-top:30px;"><strong>Facilities</strong></p>
                                                 <div class="slideshow-container">
                                                     <div class="slick-slider">
@@ -224,8 +224,9 @@
                                                     </div>
                                                 </div>
                                                 @endif
-                                                <p style="padding-top:30px;"><strong>Albums</strong></p>
-                                                @if(!empty($data->venueAlbums))
+                                                
+                                                @if(count($data->venueAlbums) != 0)
+                                                    <p style="padding-top:30px;"><strong>Albums</strong></p>
                                                     @foreach($data->venueAlbums as $key => $album)
                                                         <button href="#collapse{{$key}}" class="gdlr-reservation-bar-button gdlr-button with-border"  onclick="showhide(this)">{{$album->title}}</button>
                                                     @endforeach
