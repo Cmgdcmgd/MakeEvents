@@ -228,7 +228,7 @@ class Controller extends BaseController
 
     public function venuedetails($id){
         
-        $data = Venues::with(['venueAmenities', 'venueEvents', 'venueServices', 'venueUser'])->where('venue_id', $id)->first();
+        $data = Venues::with(['venueAlbums', 'venueFacilities', 'venueAmenities', 'venueEvents', 'venueServices', 'venueUser'])->where('venue_id', $id)->first();
 
         //dd($data);
         return view('mainpage.venuedetails',compact('data'));
@@ -333,7 +333,7 @@ class Controller extends BaseController
     public function deletealbum(Request $data)
     {
         $album = VenuesAlbums::where('id', $data['id'])->first();
-        $otherphotos = explode(",",$album->photos);
+        $otherphotos = explode(",", $album->photos);
             for($x = 0; $x < count($otherphotos); $x++){
                 File::delete("mainpage/albums/".$otherphotos[$x]);
             }

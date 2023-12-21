@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\VenuesAlbums;
 use App\Models\VenuesEvents;
+use App\Models\VenuesFacilities;
 use App\Models\VenuesServices;
 use App\Models\VenuesAmeneties;
 use App\Models\User;
@@ -44,6 +46,16 @@ class Venues extends Model
     public function venueServices()
     {
         return $this->hasMany(VenuesServices::class, 'venue_id', 'venue_id');
+    }
+
+    public function venueFacilities()
+    {
+        return $this->hasMany(VenuesFacilities::class, 'venue_id', 'venue_id');
+    }
+
+    public function venueAlbums()
+    {
+        return $this->hasMany(VenuesAlbums::class, 'venue_id', 'venue_id');
     }
 
     public function venueUser()

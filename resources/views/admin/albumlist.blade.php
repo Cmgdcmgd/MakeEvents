@@ -67,7 +67,7 @@
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <div class="remove">
-                                                                        <button class="btn btn-sm btn-danger remove-item-btn deletealbum" id="{{$album->venue_id}}">Delete</button>
+                                                                        <button class="btn btn-sm btn-danger remove-item-btn deletealbum" id="{{$album->id}}">Delete</button>
                                                                     </div>
                                                                 </div>
                                                             </td>

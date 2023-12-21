@@ -85,6 +85,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -185,7 +186,22 @@
     }
        
     });
-
+    $('.slick-slider').slick({
+        arrows: true,
+      });
+    function showhide(elem) 
+    {  
+        var div = document.getElementById(elem.getAttribute("href").replace("#", ""));
+        $('.hideAllClick').hide();
+        
+        if (div.style.display !== "none") {  
+            div.style.display = "none";  
+        }  
+        else {  
+            div.style.display = "block";
+            $(".slick-slider").slick("refresh");
+        }  
+    }  
     const
     range = document.getElementById('maxcapacity'),
     rangeV = document.getElementById('rangeV'),
@@ -206,6 +222,7 @@
         tokenSeparators: [','],
         minimumResultsForSearch: -1,
     });
+    
     
 </script>
 @isset($expiry)

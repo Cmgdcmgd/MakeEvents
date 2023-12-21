@@ -211,8 +211,43 @@
                                                 <img src="{{ asset('mainpage/main photos') }}/{{ $data->package_photo }}"
                                                                             alt="" width="400"
                                                                             height="300" />
-                                                
                                                 @endif
+                                                @if(!empty($data->venueFacilities))
+                                                <p style="padding-top:30px;"><strong>Facilities</strong></p>
+                                                <div class="slideshow-container">
+                                                    <div class="slick-slider">
+                                                        @foreach($data->venueFacilities as $facility)
+                                                        <div><img src="{{ asset('mainpage/facilities') }}/{{ $facility->photo }}" alt="" >
+                                                            {{ $facility->title }}
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                @endif
+                                                <p style="padding-top:30px;"><strong>Albums</strong></p>
+                                                @if(!empty($data->venueAlbums))
+                                                    @foreach($data->venueAlbums as $key => $album)
+                                                        <button href="#collapse{{$key}}" class="gdlr-reservation-bar-button gdlr-button with-border"  onclick="showhide(this)">{{$album->title}}</button>
+                                                    @endforeach
+                                                    @foreach($data->venueAlbums as $key => $album)
+                                                        <div class="hideAllClick"  id="collapse{{$key}}" @if($key != 0) style="display:none;" @endif>
+                                                            <p style="padding-top:30px; text-align:center;"><strong>{{$album->title}}</strong></p>
+                                                            <div class="slideshow-container">
+                                                                <div class="slick-slider">
+                                                                    @php
+                                                                        $albumPhotos = explode(',', $album->photos);
+                                                                    @endphp
+                                                                    @for ($i = 0; $i < count($albumPhotos); $i++)
+                                                                        <div>
+                                                                            <img src="{{ asset('mainpage/albums') }}/{{ $albumPhotos[$i] }}" alt="">
+                                                                        </div>
+                                                                    @endfor
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                
 
                                             </div>
                                         </div>

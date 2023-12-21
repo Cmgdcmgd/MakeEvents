@@ -29,7 +29,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,700|Open+Sans:300,300i,400,400i,600,700,800|Droid+Serif:300,300i,400,600,700" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel='stylesheet' href="{{asset('mainpage/css/slick-theme.css')}}" type='text/css' media='all'>
     <!-- load the script for older ie version -->
     <!--[if lt IE 9]>
 	<script src="https://demo.goodlayers.com/hotelmaster/wp-content/themes/hotelmaster/javascript/html5.js" type="text/javascript"></script>
