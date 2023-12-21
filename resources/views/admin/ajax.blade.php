@@ -55,6 +55,88 @@ $('.deleteuser').click(function(e){
     }); 
 });
 
+$('.deleteFacility').click(function(e){
+
+    e.preventDefault();
+
+    var id = $(this).attr("id");
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "you want to delete this facility?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+    }).then((willDelete) => {
+        if (willDelete.isConfirmed) {
+            Swal.fire(
+                'Deleted!',
+                'Facility has been deleted.',
+                'success'
+            ).then((confirmdelete) => {
+                if(confirmdelete){
+                    $.ajax({
+                        url: '/deletefacility',
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        dataType: 'HTML',
+                        success: function(response){
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+            
+        }
+    }); 
+});
+
+$('.deletealbum').click(function(e){
+
+e.preventDefault();
+
+var id = $(this).attr("id");
+
+Swal.fire({
+    title: 'Are you sure?',
+    text: "you want to delete this album?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes!'
+}).then((willDelete) => {
+    if (willDelete.isConfirmed) {
+        Swal.fire(
+            'Deleted!',
+            'Album has been deleted.',
+            'success'
+        ).then((confirmdelete) => {
+            if(confirmdelete){
+                $.ajax({
+                    url: '/deletealbum',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    dataType: 'HTML',
+                    success: function(response){
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+        
+    }
+}); 
+});
+
+
+
 $('.description').click(function(e){
 
     e.preventDefault();
@@ -77,6 +159,17 @@ $('.mainphoto').click(function(e){
     $('#mainPhotoBody').append('<img src="mainpage/main photos/' + mainphoto + '"width="90%">');
 });
 
+$('.facility_photo').click(function(e){
+
+e.preventDefault();
+
+var mainphoto = $(this).attr("data-mainphoto");
+
+$('#mainPhotoBody').empty();
+
+$('#mainPhotoBody').append('<img src="{{asset("mainpage/facilities")}}/' + mainphoto + '"width="90%">');
+});
+
 $('.otherphotos').click(function(e){
 
     e.preventDefault();
@@ -89,6 +182,20 @@ $('.otherphotos').click(function(e){
     $('#otherPhotoBody').append('<img src="mainpage/additional photos/' + otherphoto + '" width="90%">');
     $('#otherPhotoLabel').append(otherphoto);
 });
+
+$('.albumphotos').click(function(e){
+
+e.preventDefault();
+
+var otherphoto = $(this).attr("id");
+
+$('#otherPhotoBody').empty();
+$('#otherPhotoLabel').empty();
+
+$('#otherPhotoBody').append('<img src="{{asset("mainpage/albums")}}/' + otherphoto + '" width="90%">');
+$('#otherPhotoLabel').append(otherphoto);
+});
+
 
 $('.mainphotocoordinator').click(function(e){
 

@@ -17,9 +17,11 @@ use App\Models\Venues;
 use App\Models\Coordinators;
 use App\Models\Eventbooking;
 use App\Models\Coordinatorbooking;
+use App\Models\VenuesAlbums;
 use App\Models\VenuesAmeneties;
 use App\Models\VenuesEvents;
 use App\Models\VenuesServices;
+use App\Models\VenuesFacilities;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -221,7 +223,7 @@ class Controller extends BaseController
         $services = VenuesServices::all()->unique('service_name');
         $amenities = VenuesAmeneties::all()->unique('amenity_name');
 
-        return view('admin.newvenue', compact('events', 'services', 'amenities'));
+        return view('admin.newVenue', compact('events', 'services', 'amenities'));
     }
 
     public function venuedetails($id){
@@ -245,6 +247,98 @@ class Controller extends BaseController
         }
         
         return view('admin.venuesList',compact('data'));
+    }
+
+    public function facilitylist($id){
+
+        $venue = Venues::where('venue_id', $id)->first();
+        $data = DB::table('venues_facilities')
+            ->select('*')
+            ->where('venue_id',$id)
+            ->get();
+       
+        return view('admin.facilityList',compact('data', 'venue'));
+    }
+
+    public function newfacility($id){
+        $venue = Venues::where('venue_id', $id)->first();
+        return view('admin.newfacility',compact('venue'));
+    }
+
+    public function addfacility(Request $data)
+    {
+        $photo = $data->file('photo');
+        $photo->move(public_path('/mainpage/facilities'), $photo->getClientOriginalName());
+        $facilityPhoto = $photo->getClientOriginalName();
+
+        $facility = new VenuesFacilities();
+        $facility->title = $data['title'];
+        $facility->venue_id = $data['venue_id'];
+        $facility->photo = $facilityPhoto;
+        $facility->save();
+
+        $venue = Venues::where('venue_id', $data['venue_id'])->first();
+
+        return redirect('/venuefacilitylist/'.$venue->venue_id)->with('message', 'Facility successfully added!');
+
+    }
+
+    public function deletefacility(Request $data)
+    {
+        $facility = VenuesFacilities::where('id', $data['id'])->first();
+        File::delete("mainpage/facilities/".$facility->photo);
+        $facility->delete();
+
+    }
+
+    public function albumlist($id){
+
+        $venue = Venues::where('venue_id', $id)->first();
+        $data = DB::table('venues_albums')
+            ->select('*')
+            ->where('venue_id',$id)
+            ->get();
+       
+        return view('admin.albumlist',compact('data', 'venue'));
+    }
+
+    public function newalbum($id){
+        $venue = Venues::where('venue_id', $id)->first();
+        return view('admin.newalbum',compact('venue'));
+    }
+
+    public function addalbum(Request $data)
+    {
+        $photos = [];
+        
+        foreach($data->file('photos') as $file){
+            $file->move(public_path('/mainpage/albums'), $file->getClientOriginalName());
+            array_push($photos,$file->getClientOriginalName());
+        }
+
+        $photos = implode(",",$photos);
+
+        $album = new VenuesAlbums();
+        $album->title = $data['title'];
+        $album->venue_id = $data['venue_id'];
+        $album->photos = $photos;
+        $album->save();
+
+        $venue = Venues::where('venue_id', $data['venue_id'])->first();
+
+        return redirect('/albumlist/'.$venue->venue_id)->with('message', 'Album successfully added!');
+
+    }
+
+    public function deletealbum(Request $data)
+    {
+        $album = VenuesAlbums::where('id', $data['id'])->first();
+        $otherphotos = explode(",",$album->photos);
+            for($x = 0; $x < count($otherphotos); $x++){
+                File::delete("mainpage/albums/".$otherphotos[$x]);
+            }
+        $album->delete();
+
     }
 
     public function venueedit($id){

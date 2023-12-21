@@ -55,7 +55,18 @@ Route::get('/coordinatorslist', [Controller::class, 'coordinatorslist']);
 Route::post('/adduser', [Controller::class, 'adduser']);
 Route::get('/useredit/{id}', [Controller::class, 'useredit']);
 Route::get('/venueedit/{id}', [Controller::class, 'venueedit']);
+Route::get('/venuefacilitylist/{id}', [Controller::class, 'facilitylist']);
+Route::get('/newfacility/{id}', [Controller::class, 'newfacility']);
+Route::post('/addfacility', [Controller::class, 'addfacility']);
+Route::post('/deletefacility', [Controller::class, 'deletefacility']);
+Route::get('/albumlist/{id}', [Controller::class, 'albumlist']);
+Route::get('/newalbum/{id}', [Controller::class, 'newalbum']);
+Route::post('/addalbum', [Controller::class, 'addalbum']);
+Route::post('/deletealbum', [Controller::class, 'deletealbum']);
+
 Route::get('/coordinatoredit/{id}', [Controller::class, 'coordinatoredit']);
+
+
 Route::post('/edituser', [Controller::class, 'editUser']);
 Route::post('/editvenue', [Controller::class, 'editvenue']);
 Route::post('/deleteuser', [Controller::class, 'deleteUser']);
