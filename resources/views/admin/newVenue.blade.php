@@ -55,19 +55,15 @@
                                             <!--end col-->
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="main_photo" class="form-label">Main Photo</label>
-                                                <input class="form-control" name="main_photo" type="file" accept="image/*" id="main_photo">
+                                                <input class="form-control" name="main_photo" type="file" accept="image/*" id="main_photo" required>
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
-                                                <label for="main_photo" class="form-label">Package Photo</label>
-                                                <input class="form-control" name="package_photo" type="file" accept="image/*" id="package_photo">
+                                                <label for="additional_photos" class="form-label">Package Photos</label>
+                                                <input class="form-control" name="package_photos[]" type="file" multiple accept="image/*" id="additional_photos">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="additional_photos" class="form-label">Additional Photos</label>
-                                                <input class="form-control" name="additional_photos[]" type="file" multiple accept="image/*" id="additional_photos">
-                                            </div>
-                                            <div class="col-xxl-6 col-md-6">
-                                                <label for="bank" class="form-label">Bank name - Account Number</label>
-                                                <input class="form-control" name="bank" type="text" id="bank">
+                                                <input class="form-control" name="additional_photos[]" type="file" multiple accept="image/*" id="additional_photos" required>
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="bank" class="form-label">Bookings allowed per day</label>

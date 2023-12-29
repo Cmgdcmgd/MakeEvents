@@ -68,6 +68,7 @@ class User extends Authenticatable
                     'password' => Hash::make($data['password']),
                     'contact_number' => $data['contact_number'],
                     'user_type' => $data['user_type'],
+                    'active_status' => 1,
                     'profile_picture' => $file
             ]);
         }
@@ -80,6 +81,7 @@ class User extends Authenticatable
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                     'contact_number' => $data['contact_number'],
+                    'active_status' => 1,
                     'user_type' => $data['user_type'],
             ]);
         }

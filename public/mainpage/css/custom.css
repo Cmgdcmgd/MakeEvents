@@ -110,3 +110,7 @@ input[type=range] {
     margin: auto;
     text-align: center;
   }
+
+  .larger-font p {
+    font-size: 18px;
+  }

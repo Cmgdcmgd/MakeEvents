@@ -47,8 +47,18 @@
                                                 </div>
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
-                                                <label for="profpic" class="form-label">Admin Picture</label>
-                                                <input class="form-control" name="profpic" id="formSizeDefault" type="file" accept="image/*" id="profpic">
+                                                <div>
+                                                    <label for="contact_number" class="form-label">Location</label>
+                                                    <input type="text" name="location" value="{{$coordinator->location}}" class="form-control" id="contact_number">
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="bank" class="form-label">Events Offered</label>
+                                                <select class="required form-control multiple_selects" name="events_offered[]" multiple="multiple">
+                                                    @foreach($events as $option)
+                                                        <option @if(in_array($option->event_name , $coordinatorEvents)) selected @endif value="{{$option->event_name}}">{{$option->event_name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="price" class="form-label">Price</label>

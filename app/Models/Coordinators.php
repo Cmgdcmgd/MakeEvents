@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\CoordinatorsEvents;
+use App\Models\CoordinatorsAlbums;
 
 class Coordinators extends Model
 {
     use HasFactory;
 
     protected $table = 'coordinators';
+
+    protected $primaryKey = 'coordinator_id';
+
+    public $timestamps = false;
 
     protected $fillable = [
         'coordinator_id',
@@ -21,6 +28,21 @@ class Coordinators extends Model
         'additional_photos',
         'date_created'
     ];
+
+    public function coordinatorUser()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function coordinatorEvents()
+    {
+        return $this->hasMany(CoordinatorsEvents::class, 'coordinator_id', 'coordinator_id');
+    }
+
+    public function CoordinatorsAlbums()
+    {
+        return $this->hasMany(CoordinatorsAlbums::class, 'coordinator_id', 'coordinator_id');
+    }
 
     public static function addOrUpdateCoordinator($data){
         
@@ -45,7 +67,7 @@ class Coordinators extends Model
                     ],
                     [
                         'price' => $data['price'],
-                        'bank' => $data['bank'],
+                       
                         'description' => $data['description'],
                         'main_photo' => $data->file('main_photo')->getClientOriginalName(),
                         'additional_photos' => $additionalPhotos
@@ -61,7 +83,7 @@ class Coordinators extends Model
                     ],
                     [
                         'price' => $data['price'],
-                        'bank' => $data['bank'],
+                    
                         'description' => $data['description'],
                         'main_photo' => $data->file('main_photo')->getClientOriginalName(),
                     ]
@@ -87,7 +109,7 @@ class Coordinators extends Model
                     ],
                     [
                         'price' => $data['price'],
-                        'bank' => $data['bank'],
+                     
                         'description' => $data['description'],
                         'additional_photos' => $additionalPhotos
                     ]
@@ -101,7 +123,7 @@ class Coordinators extends Model
                     ],
                     [
                         'price' => $data['price'],
-                        'bank' => $data['bank'],
+                      
                         'description' => $data['description'],
                     ]
                 );

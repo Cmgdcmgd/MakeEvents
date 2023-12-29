@@ -15,6 +15,8 @@ use App\Mail\MailNotify;
 use App\Models\User;
 use App\Models\Venues;
 use App\Models\Coordinators;
+use App\Models\CoordinatorsEvents;
+use App\Models\CoordinatorsAlbums;
 use App\Models\Eventbooking;
 use App\Models\Coordinatorbooking;
 use App\Models\VenuesAlbums;
@@ -27,7 +29,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Services\OTP\Types\EmailOTP;
 use App\Services\OTP\OTPService;
-
+use Faker\Core\Coordinates;
 
 class Controller extends BaseController
 {
@@ -168,9 +170,18 @@ class Controller extends BaseController
         $mainPhoto->move(public_path('/mainpage/main photos'), $mainPhoto->getClientOriginalName());
         $mainPhotoName = $mainPhoto->getClientOriginalName();
 
-        $packagePhoto = $data->file('package_photo');
-        $packagePhoto->move(public_path('/mainpage/main photos'), $packagePhoto->getClientOriginalName());
-        $packagePhotoName = $packagePhoto->getClientOriginalName();
+        // $packagePhoto = $data->file('package_photo');
+        // $packagePhoto->move(public_path('/mainpage/main photos'), $packagePhoto->getClientOriginalName());
+        // $packagePhotoName = $packagePhoto->getClientOriginalName();
+        
+        $packagePhotos = [];
+        
+        foreach($data->file('package_photos') as $file){
+            $file->move(public_path('/mainpage/main photos'), $file->getClientOriginalName());
+            array_push($packagePhotos,$file->getClientOriginalName());
+        }
+
+        $packagePhotos = implode(",",$packagePhotos);
 
         $additionalPics = [];
         
@@ -181,25 +192,31 @@ class Controller extends BaseController
 
         $additionalPhotos = implode(",",$additionalPics);
 
-        $id = Venues::addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotoName);
+        $id = Venues::addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotos);
         
-        foreach ($data['events_offered'] as $key => $event) {
-            $venueEvent = new VenuesEvents;
-            $venueEvent->venue_id = $id;
-            $venueEvent->event_name = ucfirst($event);
-            $venueEvent->save();
+        if($data['events_offered'] != null) {
+            foreach ($data['events_offered'] as $key => $event) {
+                $venueEvent = new VenuesEvents;
+                $venueEvent->venue_id = $id;
+                $venueEvent->event_name = ucfirst($event);
+                $venueEvent->save();
+            }
         }
-        foreach ($data['services_offered'] as $key => $service) {
-            $venueService = new VenuesServices;
-            $venueService->venue_id = $id;
-            $venueService->service_name = ucfirst($service);
-            $venueService->save();
+        if($data['services_offered'] != null) {
+            foreach ($data['services_offered'] as $key => $service) {
+                $venueService = new VenuesServices;
+                $venueService->venue_id = $id;
+                $venueService->service_name = ucfirst($service);
+                $venueService->save();
+            }
         }
-        foreach ($data['amenities_offered'] as $key => $amenity) {
-            $venueAmenity = new VenuesAmeneties;
-            $venueAmenity->venue_id = $id;
-            $venueAmenity->amenity_name = ucfirst($amenity);
-            $venueAmenity->save();
+        if($data['amenities_offered'] != null) {
+            foreach ($data['amenities_offered'] as $key => $amenity) {
+                $venueAmenity = new VenuesAmeneties;
+                $venueAmenity->venue_id = $id;
+                $venueAmenity->amenity_name = ucfirst($amenity);
+                $venueAmenity->save();
+            }
         }
 
         return redirect('/venueslist')->with('message', 'Venue successfully added!');
@@ -291,6 +308,57 @@ class Controller extends BaseController
 
     }
 
+    public function coordinatoralbumlist($id){
+
+        $coordinator = Coordinators::with('coordinatorUser')->where('coordinator_id', $id)->first();
+        $data = DB::table('coordinators_albums')
+            ->select('*')
+            ->where('coordinator_id',$id)
+            ->get();
+       
+        return view('admin.coordinatoralbumlist',compact('data', 'coordinator'));
+    }
+
+    public function newcoordinatoralbum($id){
+        $coordinator = Coordinators::where('coordinator_id', $id)->first();
+        return view('admin.newcoordinatoralbum',compact('coordinator'));
+    }
+
+    public function addcoordinatoralbum(Request $data) 
+    {
+        $photos = [];
+        
+        foreach($data->file('photos') as $file){
+            $file->move(public_path('/mainpage/coordinators/albums'), $file->getClientOriginalName());
+            array_push($photos,$file->getClientOriginalName());
+        }
+
+        $photos = implode(",",$photos);
+
+        $album = new CoordinatorsAlbums();
+        $album->title = $data['title'];
+        $album->coordinator_id = $data['coordinator_id'];
+        $album->photos = $photos;
+        $album->save();
+
+        // $venue = Venues::where('venue_id', $data['venue_id'])->first();
+
+        return redirect('/coordinatoralbumlist/'.$data['coordinator_id'])->with('message', 'Album successfully added!');
+    }
+
+    public function deletecoordinatoralbum(Request $data)
+    {
+        $album = CoordinatorsAlbums::where('id', $data['id'])->first();
+        $otherphotos = explode(",", $album->photos);
+            for($x = 0; $x < count($otherphotos); $x++){
+                File::delete("mainpage/coordinators/albums".$otherphotos[$x]);
+            }
+        $album->delete();
+
+    }
+
+    
+
     public function albumlist($id){
 
         $venue = Venues::where('venue_id', $id)->first();
@@ -356,14 +424,21 @@ class Controller extends BaseController
     }
 
     public function editvenue(Request $data){
-        if(!empty($data['package_photo'])){
+        if(!empty($data['package_photos'])){
 
-            $packagePhoto = Venues::where('venue_id',$data['venue_id'])->first();
+            $otherpics = Venues::where('venue_id',$data['venue_id'])->first();
 
-            File::delete("mainpage/main photos/".$packagePhoto->package_photo);
+            $otherphotos = explode(",",$otherpics->package_photo);
 
-            $packagePhoto = $data->file('package_photo');
-            $packagePhoto->move(public_path('/mainpage/main photos'), $packagePhoto->getClientOriginalName());
+            for($x = 0; $x < count($otherphotos); $x++){
+                File::delete("mainpage/main photos/".$otherphotos[$x]);
+            }
+
+            $additionalPics = [];
+        
+            foreach($data->file('package_photos') as $file){
+                $file->move(public_path('/mainpage/main photos'), $file->getClientOriginalName());
+            }
 
         }
 
@@ -409,23 +484,29 @@ class Controller extends BaseController
             VenuesAmeneties::where('venue_id', $data['venue_id'])->delete();
         }
 
-        foreach ($data['events_offered'] as $key => $event) {
-            $venueEvent = new VenuesEvents;
-            $venueEvent->venue_id = $data['venue_id'];
-            $venueEvent->event_name = ucfirst($event);
-            $venueEvent->save();
+        if($data['events_offered'] != null) {
+            foreach ($data['events_offered'] as $key => $event) {
+                $venueEvent = new VenuesEvents;
+                $venueEvent->venue_id = $data['venue_id'];
+                $venueEvent->event_name = ucfirst($event);
+                $venueEvent->save();
+            }
         }
-        foreach ($data['services_offered'] as $key => $service) {
-            $venueService = new VenuesServices;
-            $venueService->venue_id = $data['venue_id'];
-            $venueService->service_name = ucfirst($service);
-            $venueService->save();
+        if($data['services_offered'] != null) {
+            foreach ($data['services_offered'] as $key => $service) {
+                $venueService = new VenuesServices;
+                $venueService->venue_id = $data['venue_id'];
+                $venueService->service_name = ucfirst($service);
+                $venueService->save();
+            }
         }
-        foreach ($data['amenities_offered'] as $key => $amenity) {
-            $venueAmenity = new VenuesAmeneties;
-            $venueAmenity->venue_id = $data['venue_id'];
-            $venueAmenity->amenity_name = ucfirst($amenity);
-            $venueAmenity->save();
+        if($data['amenities_offered'] != null) {
+            foreach ($data['amenities_offered'] as $key => $amenity) {
+                $venueAmenity = new VenuesAmeneties;
+                $venueAmenity->venue_id = $data['venue_id'];
+                $venueAmenity->amenity_name = ucfirst($amenity);
+                $venueAmenity->save();
+            }
         }
 
         Venues::editVenue($data);
@@ -455,7 +536,6 @@ class Controller extends BaseController
                 ->where('coordinators.user_id',session('userid'))
                 ->get();
         }
-        
         return view('admin.coordinatorsList',compact('users'));
     }
 
@@ -469,7 +549,7 @@ class Controller extends BaseController
                 ->select('coordinators.*','users.*')
                 ->where('coordinators.user_id',$id)
                 ->first();
-
+            $coordinatorEvents = CoordinatorsEvents::where('coordinator_id', $coordinator->coordinator_id)->pluck('event_name')->toArray();
         }
         else{
 
@@ -478,11 +558,10 @@ class Controller extends BaseController
                 ->select('coordinators.*','users.*')
                 ->where('coordinators.user_id',session('userid'))
                 ->first();
+            $coordinatorEvents = CoordinatorsEvents::where('coordinator_id', $coordinator->coordinator_id)->pluck('event_name')->toArray();
         }
-
-        
-        
-        return view('admin.coordinatorEdit',compact('coordinator'));
+        $events = CoordinatorsEvents::all();
+        return view('admin.coordinatorEdit',compact('coordinator', 'events', 'coordinatorEvents'));
     }
 
     public function coordinatorprofilemanagement(Request $data){
@@ -499,6 +578,13 @@ class Controller extends BaseController
 
         }
 
+        if(!empty($data['package_photo'])){
+
+            $packagephoto = $data->file('package_photo');
+            $packagephoto->move(public_path('/mainpage/coordinators/packages'), $packagephoto->getClientOriginalName());
+
+        }
+
         if(!empty($data['additional_photos'])){
         
             foreach($data->file('additional_photos') as $file){
@@ -509,6 +595,31 @@ class Controller extends BaseController
         User::editCoordinator($data);
 
         Coordinators::addOrUpdateCoordinator($data);
+        $coordinators = Coordinators::where('user_id', $data['user_id'])->first();
+        $coordinators->location = $data['location'];
+        if(!empty($data['package_photo'])){
+
+            $packagephoto = $data->file('package_photo');
+            $packagephoto->move(public_path('/mainpage/coordinators/packages'), $packagephoto->getClientOriginalName());
+            $coordinators->package_photo = $data->file('package_photo')->getClientOriginalName();
+        }
+        
+        $coordinators->save();
+
+        $coordinatorEvents = CoordinatorsEvents::where('coordinator_id', $coordinators->coordinator_id)->count();
+
+        if($coordinatorEvents > 0) {
+            CoordinatorsEvents::where('coordinator_id', $coordinators->coordinator_id)->delete();
+        }
+
+        if(!empty($data['events_offered'])){
+            foreach ($data['events_offered'] as $key => $event) {
+                $coordinatorEvent = new CoordinatorsEvents;
+                $coordinatorEvent->coordinator_id = $coordinators->coordinator_id;
+                $coordinatorEvent->event_name = ucfirst($event);
+                $coordinatorEvent->save();
+            }
+        }
 
         return redirect('/coordinatoredit/'.$data['user_id'])->with('message','Profile Successfully Edited!');
 
@@ -516,11 +627,13 @@ class Controller extends BaseController
 
     public function coordinatordetails($id){
         
-        $data = DB::table('users')
-                ->join('coordinators','users.id','=','coordinators.user_id')
-                ->select('coordinators.*','users.*')
-                ->where('coordinators.coordinator_id',$id)
-                ->first();
+        // $data = DB::table('users')
+        //         ->join('coordinators','users.id','=','coordinators.user_id')
+        //         ->select('coordinators.*','users.*')
+        //         ->where('coordinators.coordinator_id',$id)
+        //         ->first();
+
+        $data = Coordinators::with(['coordinatorUser', 'coordinatorEvents', 'CoordinatorsAlbums'])->where('coordinator_id', $id)->first();
 
         return view('mainpage.coordinatordetails',compact('data'));
     }
@@ -575,17 +688,26 @@ class Controller extends BaseController
         if($times > 0 ) {
             return redirect('venuedetails/'.$venues->venue_id)->with('form_errors', 'Venue is already booked at this time slot');
         }
-        $body1 = "Hi, ".$users->first_name."!";
-        $body2 = "Thank you for booking with us! To fully reserve your venue, please pay the ₱".$venues->price." fee to the bank details below: ";
-        $bankdetails = $venues->bank;
-        $body3 =  "Please do not reply to this message. This email was sent from a notification-only email address that cannot accept incoming email.";
+        $body1 = "Thank you for booking at ".$venues->venue_name;
+        $body2 = "Details of your event:";
+       
+        $deets1 = "Date: ".$request['reserved_date'];
+        $deets2 = "Time: ". $request['time_start']. " to ". $request['time_end'];
+        $deets3 = "Event name: " . $request['event_name'];
+        $deets4 = "Client Name: " . $request['client_name'];
+        $deets5 = "Number of Guests: " . $request['number_of_guests'];
+        $body3 =  "Make your event come true at MakeEvents Memorable!";
         
         $data = [
             'subject' => 'Booking Confirmation from Make Events',
             'body1' => $body1,
             'body2' => $body2,
             'body3' => $body3,
-            'bankdetails' => $bankdetails
+            'deets1' => $deets1,
+            'deets2' => $deets2,
+            'deets3' => $deets3,
+            'deets4' => $deets4,
+            'deets5' => $deets5,
         ];
 
         Mail::to($users->email)->send(new MailNotify($data));
@@ -949,7 +1071,7 @@ class Controller extends BaseController
 
     public function filtervenues(Request $request){
         
-        //dd($request->all());
+        
         $venues = Venues::with(['venueEvents', 'venueServices'])->where('venue_id', '!=', 0);
         if(!empty($request['event_offered'])) {
             $venues->whereHas('venueEvents', function (Builder $query) use (
@@ -974,7 +1096,7 @@ class Controller extends BaseController
         }
 
         if(!empty($request['location_offered'])) {
-            $venues->where('location', '>=', $request['location_offered']);
+            $venues->where('location', 'like', '%'.$request['location_offered'].'%');
         }
 
         $data = $venues->get();

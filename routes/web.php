@@ -63,6 +63,12 @@ Route::get('/albumlist/{id}', [Controller::class, 'albumlist']);
 Route::get('/newalbum/{id}', [Controller::class, 'newalbum']);
 Route::post('/addalbum', [Controller::class, 'addalbum']);
 Route::post('/deletealbum', [Controller::class, 'deletealbum']);
+Route::get('/coordinatoralbumlist/{id}', [Controller::class, 'coordinatoralbumlist']);
+Route::get('/newcoordinatoralbum/{id}', [Controller::class, 'newcoordinatoralbum']);
+Route::post('/addcoordinatoralbum', [Controller::class, 'addcoordinatoralbum']);
+Route::post('/deletecoordinatoralbum', [Controller::class, 'deletecoordinatoralbum']);
+
+
 
 Route::get('/coordinatoredit/{id}', [Controller::class, 'coordinatoredit']);
 

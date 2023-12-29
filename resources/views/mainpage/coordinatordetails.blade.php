@@ -38,7 +38,7 @@
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="user_id" value="{{session('user_id')}}">
-                                                <input type="hidden" name="coordinator_id" value="{{$data->id}}">
+                                                <input type="hidden" name="coordinator_id" value="{{$data->coordinator_id}}">
                                                 
                                                 @if(session('logged') == true)
                                                     <a href="#" class="gdlr-reservation-bar-button gdlr-button with-border" id="try">Reserve Now</a>
@@ -58,8 +58,8 @@
                                                         alt="" width="750" height="330" /></a>
                                             </div>
                                             <div class="gdlr-room-title-wrapper">
-                                                <h3 class="gdlr-room-title">{{ $data->first_name }}
-                                                    {{ $data->last_name }}</h3>
+                                                <h3 class="gdlr-room-title">{{ $data->coordinatorUser->first_name }}
+                                                    {{ $data->coordinatorUser->last_name }}</h3>
                                                 <div class="gdlr-room-price"><span class="gdlr-head">Start
                                                         From</span><span class="gdlr-tail">₱{{ $data->price }} /
                                                         Day</span></div>
@@ -141,12 +141,65 @@
                                                 <div class="gdlr-space" style="margin-top: 40px;"></div>
                                                 <div class="clear"></div>
                                                 <div class="gdlr-space" style="margin-top: -20px;"></div>
-                                                <p><strong>Details</strong></p>
-                                                <p>
-                                                    Phone: {{ $data->contact_number }}<br />
-                                                    Email: {{ $data->email }}
-                                                </p>
+                                                <div class="larger-font">
+                                                    <p><strong>More Details</strong></p>
+                                                    <p>
+                                                        Location: {{ $data->location }}<br />
+                                                        Phone: {{ $data->coordinatorUser->contact_number }}<br />
+                                                        Email: {{ $data->coordinatorUser->email }}
+                                                    </p>
 
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <p><strong>I coordinate and plang events such as</strong></p>
+                                                    <ul>
+                                                        @if(!empty($data->coordinatorEvents))
+                                                            @foreach($data->coordinatorEvents as $event)
+                                                            <li>{{$event->event_name}}</li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    @if(!empty($data->package_photo))
+                                                    <p><strong>Packages</strong></p>
+                                                    <p>Our products or/and services</p>
+                                                    <img src="{{ asset('mainpage/coordinators/packages') }}/{{ $data->package_photo }}"
+                                                                                alt="" width="400"
+                                                                                height="300" />
+                                                    @endif
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    @if(count($data->CoordinatorsAlbums) != 0)
+                                                        <p style="padding-top:30px;"><strong>Albums</strong></p>
+                                                        @foreach($data->CoordinatorsAlbums as $key => $album)
+                                                            <button href="#collapse{{$key}}" class="gdlr-reservation-bar-button gdlr-button with-border"  onclick="showhide(this)">{{$album->title}}</button>
+                                                        @endforeach
+                                                        @foreach($data->CoordinatorsAlbums as $key => $album)
+                                                            <div class="hideAllClick"  id="collapse{{$key}}" @if($key != 0) style="display:none;" @endif>
+                                                                <p style="padding-top:30px; text-align:center;"><strong>{{$album->title}}</strong></p>
+                                                                <div class="slideshow-container">
+                                                                    <div class="slick-slider">
+                                                                        @php
+                                                                            $albumPhotos = explode(',', $album->photos);
+                                                                        @endphp
+                                                                        @for ($i = 0; $i < count($albumPhotos); $i++)
+                                                                            <div>
+                                                                                <img src="{{ asset('mainpage/coordinators/albums') }}/{{ $albumPhotos[$i] }}" alt="">
+                                                                            </div>
+                                                                        @endfor
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div><!-- #room -->

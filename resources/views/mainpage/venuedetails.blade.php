@@ -71,9 +71,8 @@
                                             </div>
                                             <div class="gdlr-room-title-wrapper">
                                                 <h3 class="gdlr-room-title">{{ $data->venue_name }}</h3>
-                                                <div class="gdlr-room-price"><span class="gdlr-head">Start
-                                                        From</span><span class="gdlr-tail">₱{{ $data->price }} /
-                                                        Day</span></div>
+                                                <div class="gdlr-room-price"><span class="gdlr-head">Prices starts at
+                                                        </span><span class="gdlr-tail">₱{{ $data->price }}</span></div>
                                                 <div class="clear"></div>
                                             </div>
 
@@ -150,104 +149,117 @@
                                                 <div class="gdlr-space" style="margin-top: 40px;"></div>
                                                 <div class="clear"></div>
                                                 <div class="gdlr-space" style="margin-top: -20px;"></div>
-                                                <p><strong>Contact Information</strong></p>
-                                                <img src="{{ asset('admin/images/users') }}/{{ $data->venueUser->profile_picture }}"
-                                                                            alt="" width="400"
-                                                                            height="300" />
-                                                <p>Sales Representative: {{ $data->venueUser->first_name }}  {{ $data->venueUser->last_name }}<br />
-                                                    Contact Number: {{ $data->contact_number }}<br />
-                                                    Email: {{ $data->email_address }} <br/>
-                                                </p>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <p><strong>More Details</strong></p>
-                                                <p>Guest Capacity: {{ $data->max_capacity }}<br />
-                                                    Location: {{ $data->location }}<br />
-                                                </p>
+                                                <div class="larger-font">
+                                                    <p><strong>Contact Information</strong></p>
+                                                    <img src="{{ asset('admin/images/users') }}/{{ $data->venueUser->profile_picture }}"
+                                                                                alt="" width="400"
+                                                                                height="300" />
+                                                    <p>Sales Representative: {{ $data->venueUser->first_name }}  {{ $data->venueUser->last_name }}<br />
+                                                        Contact Number: {{ $data->contact_number }}<br />
+                                                        Email: {{ $data->email_address }} <br/>
+                                                    </p>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <p><strong>More Details</strong></p>
+                                                    <p>Guest Capacity: {{ $data->max_capacity }}<br />
+                                                        Location: {{ $data->location }}<br />
+                                                    </p>
 
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <p><strong>We provide products and/or services to events such as</strong></p>
-                                                <ul>
-                                                    @if(!empty($data->venueEvents))
-                                                        @foreach($data->venueEvents as $event)
-                                                        <li>{{$event->event_name}}</li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <p><strong>What products or/and services do we provide?</strong></p>
-                                                <ul>
-                                                    @if(!empty($data->venueServices))
-                                                        @foreach($data->venueServices as $service)
-                                                        <li>{{$service->service_name}}</li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <p><strong>Amenities</strong></p>
-                                                <ul>
-                                                    @if(!empty($data->venueAmenities))
-                                                        @foreach($data->venueAmenities as $amenity)
-                                                        <li>{{$amenity->amenity_name}}</li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                <div class="clear"></div>
-                                                @if(!empty($data->package_photo))
-                                                <p><strong>Packages</strong></p>
-                                                <p>Our products or/and services</p>
-                                                <img src="{{ asset('mainpage/main photos') }}/{{ $data->package_photo }}"
-                                                                            alt="" width="400"
-                                                                            height="300" />
-                                                @endif
-                                                @if(count($data->venueFacilities) != 0)
-                                                <p style="padding-top:30px;"><strong>Facilities</strong></p>
-                                                <div class="slideshow-container">
-                                                    <div class="slick-slider">
-                                                        @foreach($data->venueFacilities as $facility)
-                                                        <div><img src="{{ asset('mainpage/facilities') }}/{{ $facility->photo }}" alt="" >
-                                                            {{ $facility->title }}
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <p><strong>We provide products and/or services to events such as</strong></p>
+                                                    <ul>
+                                                        @if(!empty($data->venueEvents))
+                                                            @foreach($data->venueEvents as $event)
+                                                            <li>{{$event->event_name}}</li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <p><strong>What products or/and services do we provide?</strong></p>
+                                                    <ul>
+                                                        @if(!empty($data->venueServices))
+                                                            @foreach($data->venueServices as $service)
+                                                            <li>{{$service->service_name}}</li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <p><strong>Amenities</strong></p>
+                                                    <ul>
+                                                        @if(!empty($data->venueAmenities))
+                                                            @foreach($data->venueAmenities as $amenity)
+                                                            <li>{{$amenity->amenity_name}}</li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    <div class="clear"></div>
+                                                    @if(!empty($data->package_photo))
+                                                    <p><strong>Packages</strong></p>
+                                                    <p>Our products or/and services</p>
+                                                    @php
+                                                        $packagePhoto = explode(',', $data->package_photo);
+                                                    @endphp
+                                                    <div class="slideshow-container">
+                                                        <div class="slick-slider">
+                                                        @for ($i = 0; $i < count($packagePhoto); $i++)
+                                                        <div><img src="{{ asset('mainpage/main photos') }}/{{ $packagePhoto[$i] }}"
+                                                                            alt=""/>
                                                         </div>
-                                                        @endforeach
+                                                        @endfor
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                @endif
-                                                
-                                                @if(count($data->venueAlbums) != 0)
-                                                    <p style="padding-top:30px;"><strong>Albums</strong></p>
-                                                    @foreach($data->venueAlbums as $key => $album)
-                                                        <button href="#collapse{{$key}}" class="gdlr-reservation-bar-button gdlr-button with-border"  onclick="showhide(this)">{{$album->title}}</button>
-                                                    @endforeach
-                                                    @foreach($data->venueAlbums as $key => $album)
-                                                        <div class="hideAllClick"  id="collapse{{$key}}" @if($key != 0) style="display:none;" @endif>
-                                                            <p style="padding-top:30px; text-align:center;"><strong>{{$album->title}}</strong></p>
-                                                            <div class="slideshow-container">
-                                                                <div class="slick-slider">
-                                                                    @php
-                                                                        $albumPhotos = explode(',', $album->photos);
-                                                                    @endphp
-                                                                    @for ($i = 0; $i < count($albumPhotos); $i++)
-                                                                        <div>
-                                                                            <img src="{{ asset('mainpage/albums') }}/{{ $albumPhotos[$i] }}" alt="">
-                                                                        </div>
-                                                                    @endfor
+                                                   
+                                                    
+                                                    @endif
+                                                    @if(count($data->venueFacilities) != 0)
+                                                    <p style="padding-top:30px;"><strong>Facilities</strong></p>
+                                                    <div class="slideshow-container">
+                                                        <div class="slick-slider">
+                                                            @foreach($data->venueFacilities as $facility)
+                                                            <div><img src="{{ asset('mainpage/facilities') }}/{{ $facility->photo }}" alt="" >
+                                                                {{ $facility->title }}
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                    
+                                                    @if(count($data->venueAlbums) != 0)
+                                                        <p style="padding-top:30px;"><strong>Albums</strong></p>
+                                                        @foreach($data->venueAlbums as $key => $album)
+                                                            <button href="#collapse{{$key}}" class="gdlr-reservation-bar-button gdlr-button with-border"  onclick="showhide(this)">{{$album->title}}</button>
+                                                        @endforeach
+                                                        @foreach($data->venueAlbums as $key => $album)
+                                                            <div class="hideAllClick"  id="collapse{{$key}}" @if($key != 0) style="display:none;" @endif>
+                                                                <p style="padding-top:30px; text-align:center;"><strong>{{$album->title}}</strong></p>
+                                                                <div class="slideshow-container">
+                                                                    <div class="slick-slider">
+                                                                        @php
+                                                                            $albumPhotos = explode(',', $album->photos);
+                                                                        @endphp
+                                                                        @for ($i = 0; $i < count($albumPhotos); $i++)
+                                                                            <div>
+                                                                                <img src="{{ asset('mainpage/albums') }}/{{ $albumPhotos[$i] }}" alt="">
+                                                                            </div>
+                                                                        @endfor
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                                 
 
                                             </div>

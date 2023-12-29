@@ -12,14 +12,16 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Coordinator's table info</h4>
+                                    <h4 class="card-title mb-0">Album list for {{$coordinator->coordinatorUser->first_name}}</h4>
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
                                     <div class="listjs-table" id="customerList">
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
-                                                
+                                                <div>
+                                                    <a href="/newcoordinatoralbum/{{$coordinator->coordinator_id}}"><button type="button" class="btn btn-success add-btn"><i class="ri-add-line align-bottom me-1"></i>Add New Album</button></a>
+                                                </div>
                                             </div>
                                             <div class="col-sm">
                                                 <div class="d-flex justify-content-sm-end">
@@ -35,61 +37,42 @@
                                             <table class="table align-middle table-nowrap" id="customerTable">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th class="sort" data-sort="customer_name">Name</th>
-                                                        <th class="sort" data-sort="email">Email Address</th>
-                                                        <th class="sort" data-sort="phone">Contact Number</th>
-                                                        <th class="sort" data-sort="price">Price</th>
-                                                        <th class="sort" data-sort="bank">Bank</th>
-                                                        <th class="sort" data-sort="bank">Main Photo</th>
-                                                        <th class="sort" data-sort="bank">Additional Photos</th>
-                                                        <th class="sort" data-sort="bank">Description</th>
-                                                        <th class="sort" data-sort="action">Action</th>
+                                                        <th data-sort="customer_name">Album Title</th>
+                                                        <th data-sort="phone">Photos</th>
+                                                        <th data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
-                                                    @foreach ($users as $data)
-                                                        
-                                                    
+                                                    @foreach ($data as $album)
                                                         <tr>
-                                                            <td class="customer_name">{{$data->first_name}} {{$data->last_name}}</td>
-                                                            <td class="email">{{$data->email}}</td>
-                                                            <td class="phone">{{$data->contact_number}}</td>
-                                                            <td class="phone">{{$data->price}}</td>
-                                                            <td class="phone">{{$data->bank}}</td>
-                                                            <td class="date mainphotocoordinator" data-mainphoto="{{$data->main_photo}}"><a href="#" data-bs-toggle="modal" data-bs-target="#mainPhotoModal" >{{$data->main_photo}}</a></td>
+                                                            <td class="customer_name">{{$album->title}}</td>
+                                                           
                                                             <td class="date">
                                                                 @php
-                                                                    $otherpics = explode(",",$data->additional_photos);
+                                                                    $otherpics = explode(",",$album->photos);
                                                                 @endphp
                                                                 @for ($i = 0; $i < count($otherpics); $i++)
                                                                 @if ($i > 0)
                                                                     @if ($i+1 == count($otherpics))
-                                                                        <a href="#" class="otherphotoscoordinator" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
+                                                                        <a href="#" class="albumphotos" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
                                                                     @else
-                                                                        <a href="#" class="otherphotoscoordinator" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
+                                                                        <a href="#" class="albumphotos" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
                                                                     @endif
                                                                 @else
-                                                                    <a href="#" class="otherphotoscoordinator" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
+                                                                    <a href="#" class="albumphotos" id="{{$otherpics[$i]}}" data-bs-toggle="modal" data-bs-target="#otherPhotoModal">{{$otherpics[$i]}}</a>,
                                                                 @endif
                                                                     
                                                                 @endfor
                                                             </td>
-                                                            <td class="date description" data-description="{{$data->description}}"><a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal" >Click for Description</a></td>
                                                             <td>
                                                                 <div class="d-flex gap-2">
-                                                                    <div class="edit">
-                                                                        <a href="/coordinatoralbumlist/{{$data->coordinator_id}}"><button class="btn btn-sm btn-success edit-item-btn">Manage Album</button></a>
-                                                                    </div>
-                                                                    <div class="edit">
-                                                                        <a href="/coordinatoredit/{{$data->id}}"><button class="btn btn-sm btn-success edit-item-btn">Edit</button></a>
-                                                                    </div>
                                                                     <div class="remove">
-                                                                        <button class="btn btn-sm btn-danger remove-item-btn deleteuser" id="{{$data->id}}">Delete</button>
+                                                                        <button class="btn btn-sm btn-danger remove-item-btn deletecoordinatoralbum" id="{{$album->id}}">Delete</button>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        @endforeach
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
@@ -111,6 +94,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div><!-- end card -->
                             </div>
@@ -119,50 +103,12 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-
                 </div>
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-            <div id="descriptionModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Description</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="modalBodyDescription">
-                                
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <div id="mainPhotoModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Main Photo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="mainPhotoBody" class="text-center">
-                                
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+            <!-- Description Modal -->
+           
             <div id="otherPhotoModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -182,7 +128,6 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-            
         </div>
         <!-- end main content-->
 @include('admin.footer')

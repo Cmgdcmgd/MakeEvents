@@ -137,7 +137,7 @@
             if(willBook.isConfirmed) {
                 Swal.fire(
                     'Booked!',
-                    'Venue has been booked. Please check your email for payment instructions.',
+                    'Venue has been booked. Please check your email for confirmation.',
                     'success'
                 ).then((confirmbook) => {
                     var form = $(this).closest("form");

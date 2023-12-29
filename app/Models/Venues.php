@@ -63,7 +63,7 @@ class Venues extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public static function addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotoName){
+    public static function addVenue($data,$mainPhotoName,$additionalPhotos,$packagePhotos){
         $id = DB::table('venues')
             ->insertGetId([
                 'user_id' => session('userid'),
@@ -73,9 +73,8 @@ class Venues extends Model
                 'location' => $data['location'],
                 'contact_number' => $data['contact_number'],
                 'main_photo' => $mainPhotoName,
-                'package_photo' => $packagePhotoName,
+                'package_photo' => $packagePhotos,
                 'additional_photos' => $additionalPhotos,
-                'bank' => $data['bank'],
                 'description' => $data['description'],
                 'sales_representative' => $data['sales_representative'],
                 'booking_allowed' => $data['booking_allowed'],
@@ -97,15 +96,22 @@ class Venues extends Model
             ]);
         }
 
-        if(!empty($data['package_photo'])){
-            $package_photo = $data->file('package_photo');
-            $package_photo = $package_photo->getClientOriginalName();
+        if(!empty($data['package_photos'])){
+
+            $additionalPics = [];
+        
+            foreach($data->file('package_photos') as $file){
+                array_push($additionalPics,$file->getClientOriginalName());
+            }
+
+            $packagePhoto = implode(",",$additionalPics);
 
             DB::table('venues')
                 ->where('venue_id',$data['venue_id'])
                 ->update([
-                    'package_photo' => $package_photo
+                    'package_photo' => $packagePhoto
             ]);
+
         }
 
         if(!empty($data['additional_photos'])){
@@ -135,7 +141,6 @@ class Venues extends Model
                 'email_address' => $data['email_address'],
                 'location' => $data['location'],
                 'contact_number' => $data['contact_number'],
-                'bank' => $data['bank'],
                 'description' => $data['description'],
                 'sales_representative' => $data['sales_representative'],
                 'booking_allowed' => $data['booking_allowed'],
