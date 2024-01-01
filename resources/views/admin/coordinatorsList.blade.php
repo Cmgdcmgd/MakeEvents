@@ -83,9 +83,7 @@
                                                                     <div class="edit">
                                                                         <a href="/coordinatoredit/{{$data->id}}"><button class="btn btn-sm btn-success edit-item-btn">Edit</button></a>
                                                                     </div>
-                                                                    <div class="remove">
-                                                                        <button class="btn btn-sm btn-danger remove-item-btn deleteuser" id="{{$data->id}}">Delete</button>
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </td>
                                                         </tr>

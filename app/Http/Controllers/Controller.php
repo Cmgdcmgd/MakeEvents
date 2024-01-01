@@ -682,7 +682,7 @@ class Controller extends BaseController
                     )
                     ->orWhere(fn($query) =>                         
                         $query->whereTime('time_end', '>=', $request['time_start'])
-                        ->whereTime('time_end', '<=', $request['time_end'])
+                        ->whereTime('time_end', '<=', $request['time_end'])->whereDate('reserved_date', $request['reserved_date'])
                     )
                     ->count();
         if($times > 0 ) {
