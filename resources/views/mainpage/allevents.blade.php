@@ -9,7 +9,7 @@
 				</div>	
 			</div>	
 			<br>
-			<div class="container">
+			<div class="container" style="color:#ad977b;">
 				<div class="gdlr-hotel-availability-wrapper" style="margin-bottom: 20px;">
 					<form  id="filter_search" class="gdlr-hotel-availability gdlr-item" id="gdlr-hotel-availability" method="post" action="/filtervenues">
 						@csrf
