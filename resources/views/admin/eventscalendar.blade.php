@@ -52,37 +52,48 @@
                                                 <div class="d-flex mb-2">
                                                     <div class="flex-grow-1 d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-3">
-                                                            <i class="ri-calendar-event-line text-muted fs-16"></i>
+                                                            <i class="ri-calendar-line text-muted fs-16"></i> 
                                                         </div>
                                                         <div class="flex-grow-1">
                                                             <h6 class="d-block fw-semibold mb-0" id="eventstart"></h6>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <i class="ri-map-pin-line text-muted fs-16"></i>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="d-block fw-semibold mb-0"> <span id="eventlocation"></span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <i class="ri-phone-line text-muted fs-16"></i>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="d-block fw-semibold mb-0"> <span id="eventnumber"></span></h6>
+                                                <div class="d-flex mb-2">
+                                                    <div class="flex-grow-1 d-flex align-items-center">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <i class="ri-time-line text-muted fs-16"></i>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h6 class="d-block fw-semibold mb-0" id="eventtime"></h6>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2">
                                                     <div class="flex-shrink-0 me-3">
-                                                        <i class="ri-mail-line text-muted fs-16"></i>
+                                                        <i class="ri-calendar-event-line text-muted fs-16"></i>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h6 class="d-block fw-semibold mb-0"> <span id="eventemail"></span></h6>
+                                                        <h6 class="d-block fw-semibold mb-0"> <span id="eventname"></span></h6>
                                                     </div>
                                                 </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <i class="ri-user-line text-muted fs-16"></i>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="d-block fw-semibold mb-0"> <span id="clientname"></span></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <i class="ri-team-line text-muted fs-16"></i>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="d-block fw-semibold mb-0"> <span id="guests"></span></h6>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                             <!--end row-->
                                             <div class="hstack gap-2 justify-content-end">
@@ -178,18 +189,20 @@
                 eventClick: function(event){
                     
                     var id = event.id;
-
+                    console.log(event);
                     $('#eventmodaltitle').empty();
                     $('#eventstart').empty();
-                    $('#eventlocation').empty();
-                    $('#eventnumber').empty();
-                    $('#eventemail').empty();
+                    $('#eventtime').empty();
+                    $('#eventname').empty();
+                    $('#clientname').empty();
+                    $('#guests').empty();
 
                     $('#eventmodaltitle').append(event.title);
                     $('#eventstart').append(event.reserved);
-                    $('#eventlocation').append(event.location);
-                    $('#eventnumber').append(event.phone);
-                    $('#eventemail').append(event.email);
+                    $('#eventtime').append(event.time);
+                    $('#eventname').append(event.event_name);
+                    $('#clientname').append(event.client_name);
+                    $('#guests').append(event.number_of_guests);
 
                     $('#eventModal').modal('toggle');
                     

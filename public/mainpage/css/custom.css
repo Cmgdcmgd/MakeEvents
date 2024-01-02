@@ -76,7 +76,7 @@ input[type=range] {
   }
   .range-value{
     position: absolute;
-    top: -50%;
+    top: -20px;
   }
   .range-value span{
     width: 30px;

@@ -208,7 +208,7 @@
     setValue = ()=>{
         const
         newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
-        newPosition = 10 - (newValue * 0.2);
+        newPosition = 23 - (newValue * 0.45);
         rangeV.innerHTML = `<span>${range.value}</span>`;
         rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
     };

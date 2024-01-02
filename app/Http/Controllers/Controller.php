@@ -560,7 +560,7 @@ class Controller extends BaseController
                 ->first();
             $coordinatorEvents = CoordinatorsEvents::where('coordinator_id', $coordinator->coordinator_id)->pluck('event_name')->toArray();
         }
-        $events = CoordinatorsEvents::all();
+        $events = CoordinatorsEvents::all()->unique('event_name');
         return view('admin.coordinatorEdit',compact('coordinator', 'events', 'coordinatorEvents'));
     }
 
@@ -946,7 +946,11 @@ class Controller extends BaseController
                     'start' => $booking->reserved_date,
                     'location' => $booking->location,
                     'phone' =>$booking->contact_number,
-                    'end' => $booking->reserved_date
+                    'end' => $booking->reserved_date,
+                    'time' => $booking->time_start. ' - '.$booking->time_end,
+                    'event_name' => $booking->event_name,
+                    'client_name' => $booking->client_name,
+                    'number_of_guests' => $booking->number_of_guests,
                 ];
             }
         }
@@ -1043,22 +1047,24 @@ class Controller extends BaseController
     public function coordinatorbooking(Request $request){
 
         $users = User::where('id',$request['user_id'])->first(); //session
-
-        $coordinators = User::where('id',$request['coordinator_id'])->first(); //user id
-
-        $coordinatorsprice = Coordinators::where('user_id',$request['coordinator_id'])->first();
-
+        $coordinatorsprice = Coordinators::where('coordinator_id',$request['coordinator_id'])->first();
+        $coordinators = User::where('id',$coordinatorsprice->user_id)->first(); //user id
         $body1 = "Hi, ".$users->first_name."!";
-        $body2 = "Thank you for booking a coordinator! To fully reserve your coordinator, please pay the ₱".$coordinatorsprice->price." fee to the bank details below: ";
-        $bankdetails = $coordinatorsprice->bank;
-        $body3 =  "Please do not reply to this message. This email was sent from a notification-only email address that cannot accept incoming email.";
+        $body2 = "Thank you for booking an event coordinator at  MakeEvents Memorable!";
+        $deets1 ="Name of event coordinator: ".$coordinators->first_name . ' '. $coordinators->last_name;
+        $deets2 ="Date: ".$request['reserved_date'];
+        $body3 =  "Together make your event come true at MakeEvents Memorable!";
         
         $data = [
             'subject' => 'Booking Confirmation from Make Events',
             'body1' => $body1,
             'body2' => $body2,
             'body3' => $body3,
-            'bankdetails' => $bankdetails
+            'deets1' => $deets1,
+            'deets2' => $deets2,
+            'deets3' => '',
+            'deets4' => '',
+            'deets5' => '',
         ];
 
         Mail::to($users->email)->send(new MailNotify($data));

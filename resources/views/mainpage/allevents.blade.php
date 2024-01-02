@@ -1,6 +1,6 @@
 @include('mainpage.header')
 @include('mainpage.navbar')
-		
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 			<div id="gdlr-header-substitute" ></div>
 			<div class="gdlr-page-title-wrapper"  >
 				<div class="gdlr-page-title-overlay"></div>
@@ -71,31 +71,32 @@
 								<div class="room-item-holder ">
 									<div class="clear"></div>
                                         <div class="clear"></div>
-                                    @foreach ($data as $item)
-                                    <div class="four columns">
-										<div class="gdlr-item gdlr-room-item gdlr-classic-room">
-											<div class="gdlr-ux gdlr-classic-room-ux">
-												<div class="gdlr-room-thumbnail">
-													<a href="/venuedetails/{{$item->venue_id}}" >
-														<img src="{{asset('mainpage/main photos')}}/{{$item->main_photo}}" alt="" width="700" height="400" />
+									<div class="row">
+										@foreach ($data as $item)
+										<div class="col-sm-4">
+											<div class="gdlr-item gdlr-room-item gdlr-classic-room">
+												<div class="gdlr-ux gdlr-classic-room-ux">
+													<div class="gdlr-room-thumbnail">
+														<a href="/venuedetails/{{$item->venue_id}}" >
+															<img src="{{asset('mainpage/main photos')}}/{{$item->main_photo}}" alt="" width="700" height="400" />
+														</a>
+													</div>
+													<h3 class="gdlr-room-title">
+														<a href="/venuedetails/{{$item->venue_id}}" >{{$item->venue_name}}</a>
+													</h3>
+													<div class="gdlr-hotel-room-info">
+														<div class="gdlr-room-price">
+															<span class="gdlr-tail">{{$item->location}}</span>
+														</div><div class="clear"></div>
+													</div>
+													<a class="gdlr-button with-border" href="/venuedetails/{{$item->venue_id}}">Check Details
+														<i class="fa fa-long-arrow-right icon-long-arrow-right"></i>
 													</a>
 												</div>
-												<h3 class="gdlr-room-title">
-													<a href="/venuedetails/{{$item->venue_id}}" >{{$item->venue_name}}</a>
-												</h3>
-												<div class="gdlr-hotel-room-info">
-													<div class="gdlr-room-price">
-														<span class="gdlr-tail">{{$item->location}}</span>
-													</div><div class="clear"></div>
-												</div>
-												<a class="gdlr-button with-border" href="/venuedetails/{{$item->venue_id}}">Check Details
-													<i class="fa fa-long-arrow-right icon-long-arrow-right"></i>
-												</a>
 											</div>
 										</div>
+										@endforeach
 									</div>
-                                    @endforeach
-									
 								</div>
 							</div>
 						</div>

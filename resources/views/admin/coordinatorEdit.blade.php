@@ -65,16 +65,16 @@
                                                 <input type="text" name="price" class="form-control" id="basiInput" value="{{$coordinator->price}}">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
-                                                <label for="price" class="form-label">Bank</label>
-                                                <input type="text" name="bank" class="form-control" id="basiInput" value="{{$coordinator->bank}}">
-                                            </div>
-                                            <div class="col-xxl-6 col-md-6">
                                                 <label for="main_photo" class="form-label">Main Photo</label>
                                                 <input class="form-control" name="main_photo" id="formSizeDefault" type="file" accept="image/*" id="main_photo">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="additional_photos" class="form-label">Additional Photos</label>
                                                 <input class="form-control" name="additional_photos[]" multiple id="formSizeDefault" type="file" accept="image/*" id="additional_photos">
+                                            </div>
+                                            <div class="col-xxl-6 col-md-6">
+                                                <label for="additional_photos" class="form-label">Package Photos</label>
+                                                <input class="form-control" name="package_photos[]" type="file" multiple accept="image/*" id="additional_photos">
                                             </div>
                                             <div class="col-xxl-6 col-md-6">
                                                 <label for="description" class="form-label">Description</label>
